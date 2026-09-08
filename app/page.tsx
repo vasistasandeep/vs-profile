@@ -35,6 +35,7 @@ import CaseStudyDrawer from "@/components/CaseStudyDrawer";
 import Projects from "@/components/Projects";
 import Manifesto from "@/components/Manifesto";
 import Education from "@/components/Education";
+import Certifications from "@/components/Certifications";
 import Testimonials from "@/components/Testimonials";
 import Labs from "@/components/Labs";
 import Arcade from "@/components/Arcade";
@@ -77,6 +78,9 @@ export default function HomePage() {
 
         {/* #education — Education owns its <section id="education"> */}
         <Education />
+
+        {/* #certifications — Certifications owns its <section id="certifications"> */}
+        <Certifications />
 
         {/* #endorsements — Testimonials owns its <section id="endorsements"> */}
         <Testimonials />

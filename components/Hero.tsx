@@ -114,7 +114,7 @@ export function Hero() {
               <dd className="flex flex-col items-center">
                 <AnimatedCounter
                   metric={metric}
-                  className="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-[clamp(1.875rem,4vw,3rem)] font-bold tabular-nums text-transparent"
+                  className="text-[clamp(1.875rem,4vw,3rem)] font-bold tabular-nums text-accent"
                 />
                 <span className="mt-2 text-sm text-muted">{metric.label}</span>
               </dd>

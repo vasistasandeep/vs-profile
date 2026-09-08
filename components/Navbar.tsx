@@ -125,8 +125,8 @@ export function Navbar() {
                   className={[
                     "rounded-full px-3 py-2 text-sm font-medium transition-colors",
                     isActive
-                      ? "text-accent"
-                      : "text-muted hover:text-fg",
+                      ? "bg-surface2 text-accent"
+                      : "text-muted hover:bg-surface2 hover:text-accent",
                   ].join(" ")}
                 >
                   {link.label}

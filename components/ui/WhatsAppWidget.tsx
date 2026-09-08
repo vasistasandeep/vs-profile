@@ -119,7 +119,7 @@ export function WhatsAppWidget() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="w-80 max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-2xl border border-border bg-surface"
+            className="w-80 max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-2xl border border-border bg-[#0f1626] ring-1 ring-black/40"
           >
             <div className="flex items-start justify-between gap-3 border-b border-border p-4">
               <div>
