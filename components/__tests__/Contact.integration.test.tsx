@@ -114,18 +114,13 @@ describe("Contact form submission (mocked Formspree)", () => {
       ).toBeInTheDocument();
     });
 
-    // The error state exposes the primary mailto fallback link (with the
-    // fallback address surfaced both as a cc and as inline text).
+    // The error state exposes a mailto fallback link to the contact address.
     const fallbackLink = within(status).getByRole("link", {
       name: new RegExp(site.primaryEmail, "i"),
     });
     expect(fallbackLink.getAttribute("href")).toContain(
       `mailto:${site.primaryEmail}`,
     );
-    expect(fallbackLink.getAttribute("href")).toContain(site.fallbackEmail);
-    expect(
-      within(status).getByText(new RegExp(site.fallbackEmail, "i")),
-    ).toBeInTheDocument();
   });
 
   it("Case 3: exits pending and shows error + fallback when the request aborts on timeout (Req 11.9)", async () => {
@@ -158,15 +153,12 @@ describe("Contact form submission (mocked Formspree)", () => {
       screen.queryByRole("button", { name: /sending/i }),
     ).not.toBeInTheDocument();
 
-    // Mailto fallback (primary + fallback address) is presented.
+    // Mailto fallback to the contact address is presented.
     const fallbackLink = within(status).getByRole("link", {
       name: new RegExp(site.primaryEmail, "i"),
     });
     expect(fallbackLink.getAttribute("href")).toContain(
       `mailto:${site.primaryEmail}`,
     );
-    expect(
-      within(status).getByText(new RegExp(site.fallbackEmail, "i")),
-    ).toBeInTheDocument();
   });
 });

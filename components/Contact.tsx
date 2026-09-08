@@ -132,7 +132,7 @@ export function Contact() {
 
   // mailto fallback surfacing both the primary address and the fallback
   // address (Req 11.5).
-  const fallbackMailto = `mailto:${site.primaryEmail}?cc=${site.fallbackEmail}&subject=${encodeURIComponent(
+  const fallbackMailto = `mailto:${site.primaryEmail}?subject=${encodeURIComponent(
     "Let's connect",
   )}`;
 
@@ -348,7 +348,7 @@ export function Contact() {
                   >
                     {site.primaryEmail}
                   </a>{" "}
-                  directly (or {site.fallbackEmail}).
+                  directly.
                 </p>
               )}
             </div>

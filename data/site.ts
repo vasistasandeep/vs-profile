@@ -14,16 +14,16 @@ export const site: SiteMeta = {
   monogram: "Vasista Sandeep",
   domain: "vasistasandeep.in",
   linkedInUrl,
-  primaryEmail: "contact@vasistasandeep.in",
+  primaryEmail: "vasista.sandeep@gmail.com",
   fallbackEmail: "vasista.sandeep@gmail.com",
   // Public, non-secret Formspree form URL (live form ID mrpgyepg). The Contact
   // form POSTs submissions here. A Formspree form URL is public and contains
   // no secret, so it is safe to commit.
   formspreeEndpoint: "https://formspree.io/f/mrpgyepg",
-  resumePath: "/Vasista_Sandeep_Resume.pdf",
+  resumePath: "/Vasista_Sandeep_Profile.pdf",
   // Professional headshot used as the Hero avatar and the JSON-LD Person.image.
   portrait: {
-    src: "/vasista-headshot.jpg",
+    src: "/vasista-headshot.png",
     alt: "Vasista Sandeep, AVP Program Management (Tech & Product)",
   },
   footerText:

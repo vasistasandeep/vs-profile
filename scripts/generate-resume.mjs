@@ -2,7 +2,7 @@
 //
 // Build-time resume generator. Renders scripts/resume.data.mjs into a clean,
 // ATS-friendly, print-optimized HTML document and prints it to
-// public/Vasista_Sandeep_Resume.pdf via Puppeteer (headless Chrome).
+// public/Vasista_Sandeep_Profile_generated.pdf via Puppeteer (headless Chrome).
 //
 // Usage:  npm run generate:resume
 //
@@ -18,7 +18,7 @@ import { existsSync, statSync } from "node:fs";
 import { resume } from "./resume.data.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT_PATH = resolve(__dirname, "..", "public", "Vasista_Sandeep_Resume.pdf");
+const OUT_PATH = resolve(__dirname, "..", "public", "Vasista_Sandeep_Profile_generated.pdf");
 
 /** Minimal HTML-escape for text interpolated into the template. */
 function esc(s) {
