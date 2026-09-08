@@ -28,6 +28,7 @@ import type {
 } from "@/types/content";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import GlassCard from "@/components/ui/GlassCard";
+import ShareButton from "@/components/ui/ShareButton";
 
 /** Submission lifecycle state (Req 11.8, 11.4, 11.5, 11.9). */
 type Status = "idle" | "pending" | "success" | "error";
@@ -178,6 +179,10 @@ export function Contact() {
               />
               <span>{LOCATION_LINE}</span>
             </p>
+
+            <div className="pt-2">
+              <ShareButton />
+            </div>
           </div>
         </GlassCard>
 

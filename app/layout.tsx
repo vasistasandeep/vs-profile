@@ -82,8 +82,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: site.og.imagePath,
-        width: 1200,
-        height: 630,
+        width: 1733,
+        height: 907,
         alt: site.og.title,
       },
     ],
