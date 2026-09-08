@@ -1,3 +1,65 @@
+> ## Current State (Change Log) — supersedes the original spec below
+>
+> The original specification (kept below as historical record) described the
+> first release. The shipped site has since evolved based on iterative product
+> direction. Where this addendum conflicts with the original text, THIS SECTION
+> is authoritative.
+>
+> **Theme & visual design**
+> - Single DARK theme only. The earlier light-default + light/dark toggle was
+>   removed (unreadable light mode); `ThemeToggle` deleted, no-flash script
+>   removed. Depth comes from borders + surface steps — drop shadows / neon
+>   "glow" are disabled site-wide (clean, non-shadowy look).
+> - Semantic CSS-variable tokens (`background/surface/surface2/border/fg/muted/
+>   accent/accent2`) in `app/globals.css`; consumed via Tailwind aliases.
+> - Hero is an image-free animated cover: `.hero-aurora` mesh-gradient backdrop
+>   + `.text-gradient` shimmer headline + circular headshot + metric strip.
+>
+> **Positioning & content (resume is the source of truth)**
+> - Voice reframed from "resume / job application" to warm PERSONAL BRAND /
+>   PROFILE. Removed "Available for … roles" language.
+> - Content aligned to the real resume and reframed toward PROGRAM / PRODUCT
+>   leadership (not hands-on IC engineering).
+> - Added an **Experience** timeline (SonyLIV AVP + Lead PM, Walmart, Conduent,
+>   Intel, early career) and an **Education & Credentials** section (MBA, PG Big
+>   Data, B.E.; 7 certifications with credential IDs).
+> - Testimonials relabeled as anonymized, role-only recollections (no
+>   fabricated named people).
+>
+> **Download**
+> - The "Download Resume (PDF)" action is now **"Download Profile"**
+>   (`components/ui/ResumeButton.tsx`). The PDF at
+>   `public/Vasista_Sandeep_Resume.pdf` is generated from
+>   `scripts/resume.data.mjs` via `npm run generate:profile` and reflects the
+>   full real resume.
+>
+> **Arcade (new engagement feature)**
+> - A new `#arcade` section with FIVE domain mini-games: Trivia Blitz, Incident
+>   Commander, Prioritization Poker, Error Budget Balancer, Sprint Capacity
+>   Planner. Pure game logic in `lib/games.ts` (property + example tested);
+>   content in `data/games.ts`; components in `components/games/`.
+>
+> **SEO**
+> - Hardened metadata (keywords, authors/creator/publisher, canonical, robots)
+>   and enriched JSON-LD Person node (worksFor, address, alumniOf, knowsAbout).
+>
+> **Navigation**
+> - Nav trimmed/updated: Overview, Experience, Scale, Architecture, Case
+>   Studies, Education, Arcade, Contact. (Governance & Endorsements sections
+>   remain on the page but are not top-nav links.) The "Scale & Tournaments"
+>   label is shortened to "Scale".
+>
+> **Deployment**
+> - Zero-config Vercel deploy. `vercel.json` pins the Next.js framework;
+>   `.npmrc` skips Puppeteer's Chromium download in CI (PDF is pre-generated and
+>   committed). See `DEPLOY.md` for steps + the go-live checklist.
+> - Contact form posts to the live Formspree endpoint (form id `mrpgyepg`).
+>
+> **Outstanding (needs the site owner)**
+> - Replace placeholder `public/vasista-headshot.jpg` (real square photo) and
+>   `public/og-image.png` (1200x630 social image).
+>
+
 # Requirements Document
 
 ## Introduction
