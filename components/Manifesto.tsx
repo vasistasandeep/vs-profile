@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 
 import { GlassCard } from "@/components/ui/GlassCard";
-import { staggerContainer, staggerItem, useMotionSafe } from "@/components/ui/motion";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { staggerItem, useMotionSafe } from "@/components/ui/motion";
 import { manifesto } from "@/data/manifesto";
 
 /**
@@ -25,27 +26,17 @@ import { manifesto } from "@/data/manifesto";
  * grouped without introducing a duplicate/competing anchor.
  */
 export function Manifesto() {
-  const containerVariants = useMotionSafe(staggerContainer);
   const itemVariants = useMotionSafe(staggerItem);
 
   return (
-    <div className="scroll-mt-24">
-      <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">
-          Governance
-        </p>
-        <h2 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
-          Platform Leadership Manifesto
-        </h2>
-      </header>
-
-      <motion.ul
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+    <SectionWrapper
+      id="governance-manifesto"
+      eyebrow="Governance"
+      title="Platform Leadership Manifesto"
+      stagger
+      collapsible
+    >
+      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {manifesto.map((card) => (
           <motion.li key={card.id} variants={itemVariants}>
             <GlassCard className="h-full p-6">
@@ -56,8 +47,8 @@ export function Manifesto() {
             </GlassCard>
           </motion.li>
         ))}
-      </motion.ul>
-    </div>
+      </ul>
+    </SectionWrapper>
   );
 }
 

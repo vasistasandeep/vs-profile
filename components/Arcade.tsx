@@ -91,7 +91,7 @@ export function Arcade() {
       <div
         role="tablist"
         aria-label="Choose a mini-game"
-        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
+        className="grid grid-cols-2 items-stretch gap-3 sm:grid-cols-3 lg:grid-cols-5"
       >
         {GAMES.map((g) => {
           const Icon = g.icon;
@@ -105,7 +105,7 @@ export function Arcade() {
               aria-controls={`arcade-panel-${g.id}`}
               id={`arcade-tab-${g.id}`}
               onClick={() => setActive(g.id)}
-              className={`rounded-xl border p-4 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+              className={`flex h-full flex-col rounded-xl border p-4 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                 isActive
                   ? "border-accent/60 bg-accent/5"
                   : "border-border bg-surface hover:border-accent/40"

@@ -40,6 +40,53 @@ function sectionId(targetId: string): string {
   return targetId.startsWith("#") ? targetId.slice(1) : targetId;
 }
 
+/**
+ * BrandMark - small "VS" monogram tile matching the favicon (app/icon.svg).
+ *
+ * A rounded dark square with a subtle emerald hairline border and the initials
+ * in the emerald accent. Purely decorative: it is `aria-hidden` so the brand
+ * button's accessible name comes from the visible name text alone. No shadow,
+ * dark-theme clean.
+ */
+function BrandMark() {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      width="28"
+      height="28"
+      viewBox="0 0 64 64"
+      className="h-7 w-7 flex-shrink-0"
+    >
+      <rect width="64" height="64" rx="14" fill="rgb(var(--surface))" />
+      <rect
+        x="1"
+        y="1"
+        width="62"
+        height="62"
+        rx="13"
+        fill="none"
+        stroke="rgb(var(--accent))"
+        strokeOpacity="0.35"
+        strokeWidth="2"
+      />
+      <text
+        x="32"
+        y="34"
+        fill="rgb(var(--accent))"
+        fontFamily="inherit"
+        fontSize="28"
+        fontWeight="700"
+        letterSpacing="-1"
+        textAnchor="middle"
+        dominantBaseline="central"
+      >
+        VS
+      </text>
+    </svg>
+  );
+}
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   // Optional scroll-spy: the id (without "#") of the section currently in view.
@@ -101,14 +148,16 @@ export function Navbar() {
         aria-label="Primary"
         className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
       >
-        {/* Left: monogram + availability pill */}
+        {/* Left: VS monogram mark + brand name */}
         <div className="flex min-w-0 items-center gap-3">
           <button
             type="button"
             onClick={() => handleNavigate(navLinks[0].targetId)}
-            className="truncate text-base font-semibold tracking-tight text-fg transition-colors hover:text-accent"
+            aria-label={`${site.name} — back to top`}
+            className="group flex min-w-0 items-center gap-2.5 rounded-lg text-base font-semibold tracking-tight text-fg transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            {site.monogram}
+            <BrandMark />
+            <span className="truncate">{site.monogram}</span>
           </button>
         </div>
 

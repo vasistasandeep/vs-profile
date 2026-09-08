@@ -52,14 +52,21 @@ export default function HomePage() {
         {/* #tournaments — EventsGrid owns its <section id="tournaments"> */}
         <EventsGrid />
 
-        {/* #architecture — group the flow diagram, tabs, and cost calculator */}
+        {/* #architecture — group the flow diagram, tabs, and cost calculator.
+            Each child now owns its own collapsible SectionWrapper (ids
+            architecture-flow / architecture-playbook / cost-calculator) so the
+            section-level headers collapse consistently with the rest of the
+            page. The #architecture anchor stays on this grouping wrapper. */}
         <section id="architecture" className="scroll-mt-24 flex flex-col gap-16">
           <ArchitectureFlowDiagram />
           <ArchitectureTabs />
           <CostCalculator />
         </section>
 
-        {/* #case-studies — group the evolution toggles and the case-study drawers */}
+        {/* #case-studies — group the evolution toggles and the case-study
+            drawers. Each child owns its own collapsible SectionWrapper (ids
+            platform-evolution / in-depth-case-studies); the #case-studies
+            anchor (a nav target) stays on this grouping wrapper. */}
         <section id="case-studies" className="scroll-mt-24 flex flex-col gap-16">
           <PlatformEvolution />
           <CaseStudyDrawer />
@@ -68,8 +75,9 @@ export default function HomePage() {
         {/* #projects — Projects owns its <section id="projects"> (real GitHub work) */}
         <Projects />
 
-        {/* #governance — leadership manifesto (certifications live in the
-            Education & Credentials section to avoid duplication) */}
+        {/* #governance — leadership manifesto. Manifesto owns its own
+            collapsible SectionWrapper (id="governance-manifesto"); this wrapper
+            keeps the #governance anchor stable for deep links / scroll-spy. */}
         <section id="governance" className="scroll-mt-24">
           <Manifesto />
         </section>

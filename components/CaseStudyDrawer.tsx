@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 
 import { caseStudies } from "@/data/caseStudies";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
  * CaseStudyDrawer — expanded case study cards + slide-over drawer (Req 8).
@@ -46,19 +47,15 @@ export function CaseStudyDrawer() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div>
+    <SectionWrapper
+      id="in-depth-case-studies"
+      eyebrow="Deep Dives"
+      title="In-Depth Case Studies"
+      collapsible
+    >
       {/* Scoped keyframes for the overlay fade and the drawer slide-over.
           Radix waits for these to finish before unmounting on close. */}
       <style>{drawerKeyframes}</style>
-
-      <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">
-          Deep Dives
-        </p>
-        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
-          In-Depth Case Studies
-        </h3>
-      </header>
 
       <ul className="grid list-none grid-cols-1 gap-6 p-0 lg:grid-cols-3">
         {caseStudies.map((study) => {
@@ -67,18 +64,20 @@ export function CaseStudyDrawer() {
           const isOpen = openId === study.id;
 
           return (
-            <li key={study.id}>
+            <li key={study.id} className="h-full">
               <Dialog.Root
                 open={isOpen}
                 onOpenChange={(next) => setOpenId(next ? study.id : null)}
               >
                 {/* The whole card is the trigger, so Radix restores focus to
                     it on close (Req 8.8, 8.9). `asChild` lets the trigger be a
-                    real, keyboard-reachable <button> wrapping the article. */}
+                    real, keyboard-reachable <button> wrapping the article. The
+                    trigger is `h-full` so every card in a row is equal height
+                    and the CTA pins to the bottom. */}
                 <Dialog.Trigger asChild>
                   <button
                     type="button"
-                    className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
+                    className="group block h-full w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
                     aria-label={`Read the in-depth case study: ${study.title}`}
                   >
                     <GlassCard
@@ -89,7 +88,7 @@ export function CaseStudyDrawer() {
                         <h4 className="text-lg font-semibold text-fg">
                           {study.title}
                         </h4>
-                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                        <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-muted">
                           {study.summary}
                         </p>
                         <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity group-hover:opacity-80">
@@ -160,7 +159,7 @@ export function CaseStudyDrawer() {
           );
         })}
       </ul>
-    </div>
+    </SectionWrapper>
   );
 }
 

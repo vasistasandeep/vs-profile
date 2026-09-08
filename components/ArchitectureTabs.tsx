@@ -1,11 +1,10 @@
 "use client";
 
 import * as Tabs from "@radix-ui/react-tabs";
-import { motion } from "framer-motion";
 
 import { architectureTabs } from "@/data/architecture";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { fadeUp, useMotionSafe } from "@/components/ui/motion";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
  * ArchitectureTabs — the Architectural Playbook & Observability Toolkit (Req 5).
@@ -29,26 +28,15 @@ import { fadeUp, useMotionSafe } from "@/components/ui/motion";
  * `prefers-reduced-motion`.
  */
 export function ArchitectureTabs() {
-  const variants = useMotionSafe(fadeUp);
   const defaultTab = architectureTabs[0]?.id;
 
   return (
-    <motion.div
-      className="scroll-mt-24"
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
+    <SectionWrapper
+      id="architecture-playbook"
+      eyebrow="Playbook & Toolkit"
+      title="Architectural Playbook & Observability Toolkit"
+      collapsible
     >
-      <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">
-          Playbook & Toolkit
-        </p>
-        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
-          Architectural Playbook & Observability Toolkit
-        </h3>
-      </header>
-
       <Tabs.Root defaultValue={defaultTab} className="flex flex-col">
         <Tabs.List
           aria-label="Architectural playbook categories"
@@ -90,7 +78,7 @@ export function ArchitectureTabs() {
           </Tabs.Content>
         ))}
       </Tabs.Root>
-    </motion.div>
+    </SectionWrapper>
   );
 }
 

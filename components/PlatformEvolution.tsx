@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { evolutionItems } from "@/data/evolution";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { toggleView, type EvolutionView } from "@/components/ui/state";
 
 /**
@@ -34,20 +35,18 @@ export function PlatformEvolution() {
   };
 
   return (
-    <div>
-      <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">
-          Platform Modernization
-        </p>
-        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
-          Platform Evolution
-        </h3>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-          Toggle each card between the <span className="font-medium text-amber-400">Before</span>{" "}
-          (the problem we inherited) and the{" "}
-          <span className="font-medium text-accent">After</span> (what we shipped).
-        </p>
-      </header>
+    <SectionWrapper
+      id="platform-evolution"
+      eyebrow="Platform Modernization"
+      title="Platform Evolution"
+      collapsible
+    >
+      <p className="-mt-4 mb-8 max-w-2xl text-sm leading-relaxed text-muted">
+        Toggle each card between the{" "}
+        <span className="font-medium text-amber-400">Before</span>{" "}
+        (the problem we inherited) and the{" "}
+        <span className="font-medium text-accent">After</span> (what we shipped).
+      </p>
 
       <ul className="grid list-none grid-cols-1 gap-6 p-0 lg:grid-cols-2">
         {evolutionItems.map((item) => {
@@ -61,7 +60,9 @@ export function PlatformEvolution() {
             <li key={item.id}>
               <GlassCard
                 className={`flex h-full flex-col p-6 transition-colors ${
-                  isAfter ? "border-accent/40" : "border-amber-500/30"
+                  isAfter
+                    ? "border-accent/40 bg-accent/5"
+                    : "border-amber-500/30 bg-amber-500/5"
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
@@ -145,7 +146,7 @@ export function PlatformEvolution() {
           );
         })}
       </ul>
-    </div>
+    </SectionWrapper>
   );
 }
 

@@ -271,9 +271,6 @@ describe("Testimonials — role-only attribution titles (Req 10.1)", () => {
     expect(screen.getByText("Head of Technology")).toBeInTheDocument();
     expect(screen.getByText("Chief Product Officer")).toBeInTheDocument();
     expect(
-      screen.getByText("Research Head, Personalization"),
-    ).toBeInTheDocument();
-    expect(
       screen.getByText("Chief Technology Officer"),
     ).toBeInTheDocument();
   });

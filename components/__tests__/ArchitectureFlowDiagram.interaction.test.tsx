@@ -29,7 +29,10 @@ describe("ArchitectureFlowDiagram interactions", () => {
   it("renders each layer as a focusable button region, initially inactive (Req 21.7)", () => {
     render(<ArchitectureFlowDiagram />);
 
-    const regions = screen.getAllByRole("button");
+    // The component now renders inside a collapsible SectionWrapper, which adds
+    // a header toggle <button> (no aria-pressed). The layer regions are the
+    // buttons carrying aria-pressed, so filter to those.
+    const regions = layerRegions();
     expect(regions).toHaveLength(flowLayers.length);
     for (const region of regions) {
       expect(region).toHaveAttribute("tabindex", "0");
@@ -53,8 +56,7 @@ describe("ArchitectureFlowDiagram interactions", () => {
   it("applies active state on keyboard focus (Req 21.7)", () => {
     render(<ArchitectureFlowDiagram />);
 
-    const regions = screen.getAllByRole("button");
-    const first = regions[0];
+    const first = layerRegions()[0];
 
     // The region is keyboard-reachable (tabIndex 0) and focusing it activates
     // the layer. fireEvent.focus dispatches React's onFocus deterministically.
@@ -69,7 +71,7 @@ describe("ArchitectureFlowDiagram interactions", () => {
   it("activates via Enter/Space key presses on the focused region (Req 21.7)", () => {
     render(<ArchitectureFlowDiagram />);
 
-    const second = screen.getAllByRole("button")[1];
+    const second = layerRegions()[1];
 
     // fireEvent gives deterministic key handling without focus side effects.
     fireEvent.keyDown(second, { key: "Enter" });
@@ -83,4 +85,14 @@ describe("ArchitectureFlowDiagram interactions", () => {
 /** Escape regex-special characters in dynamic label strings. */
 function escapeRe(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * The interactive layer regions only. Excludes the collapsible SectionWrapper
+ * header toggle button (which has no aria-pressed attribute).
+ */
+function layerRegions(): HTMLElement[] {
+  return screen
+    .getAllByRole("button")
+    .filter((el) => el.hasAttribute("aria-pressed"));
 }

@@ -27,14 +27,6 @@ export const testimonials: Testimonial[] = [
     initials: "CPO",
   },
   {
-    id: "research-head-personalization",
-    title: "Research Head, Personalization",
-    quote:
-      "On our personalization research project he was the rare partner who respected the science and still shipped. He gave the research a real path to production and made sure the ranking work actually reached viewers at scale.",
-    linkedInUrl: "",
-    initials: "RH",
-  },
-  {
     id: "chief-technology-officer",
     title: "Chief Technology Officer",
     quote:

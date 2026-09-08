@@ -5,11 +5,8 @@ import type { KeyboardEvent } from "react";
 import { motion } from "framer-motion";
 
 import { GlassCard } from "@/components/ui/GlassCard";
-import {
-  staggerContainer,
-  staggerItem,
-  useMotionSafe,
-} from "@/components/ui/motion";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { staggerItem, useMotionSafe } from "@/components/ui/motion";
 import { flowLayers } from "@/data/flow";
 
 /**
@@ -39,7 +36,6 @@ import { flowLayers } from "@/data/flow";
 export function ArchitectureFlowDiagram() {
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
 
-  const containerVariants = useMotionSafe(staggerContainer);
   const itemVariants = useMotionSafe(staggerItem);
 
   // Present the layers in client-to-persistence sequence order (Req 21.6).
@@ -53,22 +49,13 @@ export function ArchitectureFlowDiagram() {
   };
 
   return (
-    <motion.div
-      className="scroll-mt-24"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
+    <SectionWrapper
+      id="architecture-flow"
+      eyebrow="Architecture Flow"
+      title="System Flow: Client to Persistence"
+      stagger
+      collapsible
     >
-      <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">
-          Architecture Flow
-        </p>
-        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
-          System Flow: Client to Persistence
-        </h3>
-      </header>
-
       <ol className="flex list-none flex-col gap-4 p-0">
         {orderedLayers.map((layer) => {
           const isActive = activeLayer === layer.id;
@@ -114,7 +101,7 @@ export function ArchitectureFlowDiagram() {
           );
         })}
       </ol>
-    </motion.div>
+    </SectionWrapper>
   );
 }
 

@@ -3,12 +3,11 @@
 import { useMemo, useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
-import { motion } from "framer-motion";
 
 import { computeCost } from "@/lib/costModel";
 import type { SamplingStrategy } from "@/types/content";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { fadeUp, useMotionSafe } from "@/components/ui/motion";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
  * CostCalculator — the Interactive Telemetry & Sampling Cost Calculator (Req 6).
@@ -75,8 +74,6 @@ function describeUsers(value: number): string {
 }
 
 export function CostCalculator() {
-  const variants = useMotionSafe(fadeUp);
-
   const [concurrency, setConcurrency] = useState<number>(MAX_CONCURRENCY);
   const [sampling, setSampling] = useState<SamplingStrategy>("standard");
 
@@ -87,28 +84,19 @@ export function CostCalculator() {
   );
 
   return (
-    <motion.div
-      className="scroll-mt-24"
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
+    <SectionWrapper
+      id="cost-calculator"
+      eyebrow="Cost Modeling"
+      title="Telemetry & Sampling Cost Calculator"
+      collapsible
     >
-      <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">
-          Cost Modeling
-        </p>
-        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
-          Telemetry &amp; Sampling Cost Calculator
-        </h3>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-          A worked example of the cost lever behind full-stack observability.
-          Drag the slider to set peak viewer concurrency, switch the sampling
-          strategy, and watch the estimated monthly telemetry bill respond in
-          real time. Every figure below is computed from the assumptions noted
-          under the calculator&mdash;nothing is hard-coded.
-        </p>
-      </header>
+      <p className="-mt-4 mb-8 max-w-2xl text-sm leading-relaxed text-muted">
+        A worked example of the cost lever behind full-stack observability. Drag
+        the slider to set peak viewer concurrency, switch the sampling strategy,
+        and watch the estimated monthly telemetry bill respond in real time.
+        Every figure below is computed from the assumptions noted under the
+        calculator&mdash;nothing is hard-coded.
+      </p>
 
       <GlassCard className="p-6 sm:p-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
@@ -278,7 +266,7 @@ export function CostCalculator() {
           </p>
         </div>
       </GlassCard>
-    </motion.div>
+    </SectionWrapper>
   );
 }
 

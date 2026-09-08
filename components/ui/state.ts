@@ -64,7 +64,10 @@ export function selectTab(
   tabIds: readonly string[],
   selectedId: string
 ): Record<string, boolean> {
-  const visibility: Record<string, boolean> = {};
+  // Use a null-prototype object so ids such as "__proto__" become own
+  // enumerable keys (a plain object literal would silently mutate the prototype
+  // instead of adding a key, breaking the single-visible-panel invariant).
+  const visibility: Record<string, boolean> = Object.create(null);
   for (const tabId of tabIds) {
     visibility[tabId] = isTabVisible(selectedId, tabId);
   }

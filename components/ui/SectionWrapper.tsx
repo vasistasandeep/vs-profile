@@ -76,6 +76,9 @@ export function SectionWrapper({
   const MotionTag = as === "article" ? motion.article : motion.section;
 
   const [open, setOpen] = useState(defaultOpen);
+  // Tracks whether the open animation has fully settled, so we can release the
+  // overflow clip and stop tall content from being cut off while open.
+  const [fullyOpen, setFullyOpen] = useState(defaultOpen);
   const prefersReducedMotion = useReducedMotion();
 
   // Stable ids for the region + its labelling header (unique even if the same
@@ -115,22 +118,36 @@ export function SectionWrapper({
   }
 
   // --- Collapsible: header is a toggle button controlling a content region. ---
+  //
+  // The outer element is rendered STATICALLY (a plain section/article, no
+  // variants / initial / whileInView). The collapse open/close is the ONLY
+  // animation in this mode, so a one-time `whileInView once` reveal can never
+  // gate the children into a stuck opacity:0 state after a collapse/expand.
+  //
+  // Sections that pass `stagger` render their children as `staggerItem` motion
+  // elements with `initial="hidden"`. To guarantee those children resolve to
+  // their visible state whenever the region is open (including after re-mount
+  // on expand), the open region is a motion container carrying the stagger
+  // container variant and pinned to `animate="visible"`. That variant context
+  // resolves every `staggerItem` child to visible, so text never "clears off".
+  const Tag = as === "article" ? "article" : "section";
+
   return (
-    <MotionTag
-      id={id}
-      className={cx("scroll-mt-24", className)}
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
+    <Tag id={id} className={cx("scroll-mt-24", className)}>
       <header className="mb-8">
         <button
           type="button"
           id={headerId}
           aria-expanded={open}
           aria-controls={contentId}
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() =>
+            setOpen((prev) => {
+              // Re-clip immediately when starting to close so the collapse
+              // animation is not visually broken by overflow-visible content.
+              if (prev) setFullyOpen(false);
+              return !prev;
+            })
+          }
           className="group flex w-full cursor-pointer items-start justify-between gap-4 rounded-lg text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
           <span className="flex flex-col">
@@ -157,29 +174,55 @@ export function SectionWrapper({
 
       {prefersReducedMotion ? (
         open ? (
-          <div id={contentId} role="region" aria-labelledby={headerId}>
+          <motion.div
+            id={contentId}
+            role="region"
+            aria-labelledby={headerId}
+            variants={staggerContainer}
+            initial="visible"
+            animate="visible"
+          >
             {children}
-          </div>
+          </motion.div>
         ) : null
       ) : (
-        <AnimatePresence initial={false}>
+        <AnimatePresence
+          initial={false}
+          onExitComplete={() => setFullyOpen(false)}
+        >
           {open && (
             <motion.div
               id={contentId}
               role="region"
               aria-labelledby={headerId}
-              className="overflow-hidden"
+              // Animate only the outer wrapper's height/opacity for the
+              // collapse. While animating we clip with overflow-hidden; once the
+              // open animation settles (height:auto) we release the clip so tall
+              // content (e.g. the Arcade game panel) is never cut off.
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              style={{ overflow: fullyOpen ? "visible" : "hidden" }}
+              onAnimationComplete={() => {
+                if (open) setFullyOpen(true);
+              }}
             >
-              {children}
+              {/* Inner stagger-container context: pins every staggerItem child
+                  to its visible variant so children are always fully opaque
+                  when open, regardless of prior whileInView firing. */}
+              <motion.div
+                variants={staggerContainer}
+                initial="visible"
+                animate="visible"
+              >
+                {children}
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
       )}
-    </MotionTag>
+    </Tag>
   );
 }
 
