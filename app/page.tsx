@@ -17,6 +17,7 @@
 //   #endorsements -> Testimonials      (renders its own <section id="endorsements">)
 //   #contact      -> Contact           (renders its own <section id="contact">)
 //   #labs         -> Labs              (renders its own <section id="labs">)
+//   #arcade       -> Arcade            (renders its own <section id="arcade">)
 //
 // Grouped sections carry `scroll-mt-24` so the smooth-scroll offset clears the
 // fixed navbar. Components that own their SectionWrapper are rendered directly
@@ -35,6 +36,7 @@ import Credentials from "@/components/Credentials";
 import Education from "@/components/Education";
 import Testimonials from "@/components/Testimonials";
 import Labs from "@/components/Labs";
+import Arcade from "@/components/Arcade";
 import Contact from "@/components/Contact";
 
 export default function HomePage() {
@@ -77,6 +79,9 @@ export default function HomePage() {
 
         {/* #labs — Labs owns its <section id="labs"> */}
         <Labs />
+
+        {/* #arcade — Arcade owns its <section id="arcade"> */}
+        <Arcade />
 
         {/* #contact — Contact owns its <section id="contact"> */}
         <Contact />

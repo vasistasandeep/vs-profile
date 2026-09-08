@@ -14,5 +14,6 @@ export const navLinks: NavLink[] = [
   { label: "Architecture", targetId: "#architecture" },
   { label: "Case Studies", targetId: "#case-studies" },
   { label: "Education", targetId: "#education" },
+  { label: "Arcade", targetId: "#arcade" },
   { label: "Contact", targetId: "#contact" },
 ];

@@ -131,6 +131,7 @@ describe("smoke: semantic page structure (Req 15.3)", () => {
       "endorsements",
       "contact",
       "labs",
+      "arcade",
     ];
 
     for (const id of expectedIds) {
