@@ -26,10 +26,12 @@ const config: Config = {
         bg: "var(--bg)",
       },
       boxShadow: {
-        // Emerald / cyan accent glow shadows for hover + active states (Req 3.7, 19.3)
-        glow: "0 0 40px -10px rgba(16, 185, 129, 0.35)",
-        "glow-emerald": "0 0 40px -10px rgba(16, 185, 129, 0.35)",
-        "glow-cyan": "0 0 40px -10px rgba(34, 211, 238, 0.35)",
+        // Soft, subtle accent glows reserved mainly for hover / active states
+        // (Req 3.7, 19.3). Low spread + low opacity keeps surfaces readable
+        // and uncluttered rather than hazy.
+        glow: "0 0 20px -8px rgba(16, 185, 129, 0.22)",
+        "glow-emerald": "0 0 20px -8px rgba(16, 185, 129, 0.22)",
+        "glow-cyan": "0 0 20px -8px rgba(34, 211, 238, 0.22)",
       },
       fontFamily: {
         // Geist Sans (fallback Inter) is wired via next/font in app/layout.tsx.

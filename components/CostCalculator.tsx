@@ -53,6 +53,22 @@ const usdFmt = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+/** Compact "N.NM users" formatter for the plain-English takeaway line. */
+function millions(value: number): string {
+  return `${(value / 1_000_000).toFixed(0)}M`;
+}
+
+/**
+ * The model assumptions, surfaced verbatim in the "How this works" note so the
+ * numbers are never a black box. These mirror the constants in lib/costModel.ts.
+ */
+const ASSUMPTIONS = [
+  "Each concurrent viewer emits ~5 telemetry spans/sec across instrumented hops.",
+  "Costs are normalized over ~40 peak live-event hours per month (not 24x7).",
+  "Blended APM ingest price of ~$0.65 per million spans.",
+  "Tail-based sampling keeps 100% of error traces + 1% of healthy traces.",
+];
+
 /** Human-friendly "users" label for the slider aria-valuetext (Req 6.1, 17.2). */
 function describeUsers(value: number): string {
   return `${numberFmt.format(value)} peak concurrent users`;
@@ -86,8 +102,11 @@ export function CostCalculator() {
           Telemetry &amp; Sampling Cost Calculator
         </h3>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
-          Adjust peak concurrency and sampling strategy to see the quantified
-          impact of tail-based intelligent sampling on observability spend.
+          A worked example of the cost lever behind full-stack observability.
+          Drag the slider to set peak viewer concurrency, switch the sampling
+          strategy, and watch the estimated monthly telemetry bill respond in
+          real time. Every figure below is computed from the assumptions noted
+          under the calculator&mdash;nothing is hard-coded.
         </p>
       </header>
 
@@ -176,39 +195,87 @@ export function CostCalculator() {
           <div className="flex flex-col gap-4" aria-live="polite">
             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
               <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                Ingested Spans Per Second
+                Telemetry Ingested
               </p>
               <p className="mt-1 font-mono text-2xl font-semibold tabular-nums text-white">
                 {numberFmt.format(result.spansPerSecond)}
+                <span className="ml-1 text-sm font-normal text-slate-400">
+                  spans / sec
+                </span>
+              </p>
+              <p className="mt-1 text-xs text-slate-500">
+                Volume of trace data your APM vendor bills for.
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                Estimated Monthly APM Cost Savings
+            <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/[0.04] p-4">
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-300">
+                Estimated Monthly Telemetry Cost
               </p>
               <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="font-mono text-2xl font-semibold tabular-nums text-emerald-300">
-                  {usdFmt.format(result.savingsUsd)}
+                <span className="font-mono text-2xl font-semibold tabular-nums text-white">
+                  {usdFmt.format(result.monthlyCostUsd)}
                 </span>
-                <span className="font-mono text-lg font-medium tabular-nums text-cyan-300">
-                  {result.savingsPercent}% saved
-                </span>
+                {result.savingsUsd > 0 && (
+                  <span className="font-mono text-sm font-medium tabular-nums text-emerald-300">
+                    &darr; {usdFmt.format(result.savingsUsd)} ({result.savingsPercent}%) vs. standard
+                  </span>
+                )}
               </div>
-              <p className="mt-2 text-xs tabular-nums text-slate-500">
-                {usdFmt.format(result.monthlyCostUsd)} of{" "}
-                {usdFmt.format(result.baselineCostUsd)} baseline
+              <p className="mt-1 text-xs tabular-nums text-slate-500">
+                Baseline at 100% ingestion: {usdFmt.format(result.baselineCostUsd)} / month
               </p>
             </div>
 
-            {/* Always-visible MTTR fidelity statement (Req 6.6) */}
-            <p className="mt-auto text-sm font-medium text-slate-300">
-              <span className="text-emerald-300">
-                {result.mttrFidelityPercent}% MTTR fidelity preserved
-              </span>{" "}
-              across every concurrency and sampling combination.
+            {/* Plain-English takeaway — recomputed live so the point lands
+                without the reader having to interpret the raw numbers. */}
+            <p className="text-sm leading-relaxed text-slate-300">
+              {result.savingsUsd > 0 ? (
+                <>
+                  At {millions(result.concurrency)} peak viewers, tail-based
+                  sampling trims the telemetry bill by roughly{" "}
+                  <span className="font-semibold text-emerald-300">
+                    {usdFmt.format(result.savingsUsd)}/month
+                  </span>{" "}
+                  &mdash; while still preserving{" "}
+                  <span className="font-semibold text-emerald-300">
+                    {result.mttrFidelityPercent}% MTTR fidelity
+                  </span>{" "}
+                  (every error trace is kept, so incident debugging is unaffected).
+                </>
+              ) : (
+                <>
+                  Standard 100% ingestion captures everything but is the most
+                  expensive option. Switch to tail-based sampling to see the
+                  savings while keeping{" "}
+                  <span className="font-semibold text-emerald-300">
+                    {result.mttrFidelityPercent}% MTTR fidelity
+                  </span>
+                  .
+                </>
+              )}
             </p>
           </div>
+        </div>
+
+        {/* "How this works" note — states the model assumptions in plain
+            English so the figures are transparent, not a black box. */}
+        <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-4">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+            How this estimate works
+          </p>
+          <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-slate-400">
+            {ASSUMPTIONS.map((line) => (
+              <li key={line} className="flex gap-2">
+                <span aria-hidden="true" className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-emerald-400/70" />
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs italic leading-relaxed text-slate-500">
+            Figures are illustrative order-of-magnitude estimates to demonstrate
+            the observability cost/latency trade-off &mdash; not a vendor quote.
+          </p>
         </div>
       </GlassCard>
     </motion.div>

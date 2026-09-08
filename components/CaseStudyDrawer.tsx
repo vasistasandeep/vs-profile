@@ -83,7 +83,6 @@ export function CaseStudyDrawer() {
                   >
                     <GlassCard
                       interactive
-                      glow="emerald"
                       className="flex h-full flex-col p-6"
                     >
                       <article className="flex h-full flex-col">

@@ -7,7 +7,6 @@ import { navLinks } from "@/data/navigation";
 import { site } from "@/data/site";
 import { scrollToSection } from "@/lib/scroll";
 import { toggleMenu } from "@/components/ui/state";
-import { StatusPill } from "@/components/ui/StatusPill";
 import { ResumeButton } from "@/components/ui/ResumeButton";
 
 /**
@@ -111,11 +110,10 @@ export function Navbar() {
           >
             {site.monogram}
           </button>
-          <StatusPill className="hidden lg:inline-flex" />
         </div>
 
         {/* Center: nav links (md+) */}
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {navLinks.map((link) => {
             const isActive = activeSection === sectionId(link.targetId);
             return (

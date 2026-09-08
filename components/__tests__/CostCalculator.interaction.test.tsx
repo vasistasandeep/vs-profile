@@ -43,8 +43,8 @@ describe("CostCalculator interactions", () => {
     const user = userEvent.setup();
     render(<CostCalculator />);
 
-    // Default is Standard 100% Ingestion -> 0% saved.
-    expect(screen.getByText("0% saved")).toBeInTheDocument();
+    // Default is Standard 100% Ingestion -> no savings line is shown.
+    expect(screen.queryByText(/vs\. standard/)).not.toBeInTheDocument();
 
     // Toggle to tail-based intelligent sampling.
     const tailOption = screen.getByRole("radio", {
@@ -52,13 +52,12 @@ describe("CostCalculator interactions", () => {
     });
     await user.click(tailOption);
 
-    // A savings percentage in the [78, 82] band must now be displayed.
-    const savings = await screen.findByText(/\d+% saved/);
-    const pct = Number(savings.textContent!.match(/(\d+)% saved/)![1]);
+    // A savings percentage in the [78, 82] band must now be displayed in the
+    // "down $X (NN%) vs. standard" comparison line.
+    const savings = await screen.findByText(/\(\d+%\) vs\. standard/);
+    const pct = Number(savings.textContent!.match(/\((\d+)%\) vs\. standard/)![1]);
     expect(pct).toBeGreaterThanOrEqual(78);
     expect(pct).toBeLessThanOrEqual(82);
-    // No longer 0% saved.
-    expect(screen.queryByText("0% saved")).not.toBeInTheDocument();
   });
 
   it("recomputes displayed concurrency when the slider changes (Req 6.3)", async () => {
@@ -87,7 +86,11 @@ describe("CostCalculator interactions", () => {
     const user = userEvent.setup();
     render(<CostCalculator />);
 
-    expect(screen.getByText(/99\.9% MTTR fidelity preserved/)).toBeInTheDocument();
+    // The "99.9% MTTR fidelity" phrase lives in a <span>; assert it is present
+    // both before and after switching strategy.
+    expect(
+      screen.getByText(/99\.9% MTTR fidelity/),
+    ).toBeInTheDocument();
 
     const tailOption = screen.getByRole("radio", {
       name: /Tail-Based Intelligent Sampling/i,
@@ -95,6 +98,8 @@ describe("CostCalculator interactions", () => {
     await user.click(tailOption);
 
     // Still present after recompute.
-    expect(screen.getByText(/99\.9% MTTR fidelity preserved/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/99\.9% MTTR fidelity/),
+    ).toBeInTheDocument();
   });
 });

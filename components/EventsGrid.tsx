@@ -37,7 +37,6 @@ export function EventsGrid() {
         {eventCategories.map((category) => (
           <motion.li key={category.id} variants={staggerItem}>
             <GlassCard
-              glow={category.glow ?? "none"}
               interactive
               className="flex h-full flex-col p-6"
             >
