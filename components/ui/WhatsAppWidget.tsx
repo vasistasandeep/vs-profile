@@ -106,7 +106,7 @@ export function WhatsAppWidget() {
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3"
+      className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3"
     >
       <AnimatePresence>
         {open && (

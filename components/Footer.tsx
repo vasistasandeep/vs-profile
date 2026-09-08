@@ -24,7 +24,7 @@ export function Footer({ className, ...rest }: FooterProps) {
     <footer
       className={cx(
         "border-t border-border",
-        "px-6 py-8 text-center text-sm text-muted",
+        "px-6 pb-28 pt-8 text-center text-sm text-muted sm:pb-24",
         className,
       )}
       {...rest}

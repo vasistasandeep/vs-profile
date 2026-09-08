@@ -115,15 +115,15 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "sonyliv-automation",
-    name: "SonyLIV Automation Suite",
+    id: "ott-automation",
+    name: "OTT Automation Suite",
     domain: "Quality / Automation",
     repoUrl: "https://github.com/vasistasandeep/sonyliv-automation",
     tags: ["Test Automation", "OTT", "Quality", "TypeScript"],
     abstract:
       "A comprehensive OTT test-automation suite (75+ tests) with a web dashboard and cross-browser coverage.",
     body: [
-      "The SonyLIV Automation Suite is a comprehensive OTT test-automation project with 75+ tests, a web dashboard for results, and cross-browser coverage to catch regressions across environments.",
+      "The OTT Automation Suite is a comprehensive test-automation project for streaming apps with 75+ tests, a web dashboard for results, and cross-browser coverage to catch regressions across environments.",
       "It demonstrates a quality-first mindset: treating automated tests as a first-class asset, and giving them a dashboard so results are visible and actionable rather than hidden in logs.",
       "Built in TypeScript, the suite shows how automation, reporting, and cross-browser coverage come together into a dependable quality gate for a streaming product.",
     ],

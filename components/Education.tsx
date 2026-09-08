@@ -30,10 +30,12 @@ export function Education() {
       title="Education & Credentials"
       stagger
     >
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Education */}
-        <div>
-          <h3 className="mb-4 text-lg font-semibold text-fg">Education</h3>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 md:divide-x md:divide-border">
+        {/* Education column */}
+        <div className="md:pr-6">
+          <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-accent">
+            Education
+          </h3>
           <ul className="flex flex-col gap-4">
             {education.map((item) => (
               <motion.li key={item.id} variants={itemVariants}>
@@ -53,9 +55,11 @@ export function Education() {
           </ul>
         </div>
 
-        {/* Certifications */}
-        <div>
-          <h3 className="mb-4 text-lg font-semibold text-fg">Certifications</h3>
+        {/* Certifications column */}
+        <div className="md:pl-6">
+          <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-accent2">
+            Certifications
+          </h3>
           <ul className="flex flex-col gap-4">
             {credentialDetails.map((credential) => (
               <motion.li key={credential.id} variants={itemVariants}>
