@@ -32,6 +32,7 @@ export function EventsGrid() {
       eyebrow="High-Concurrency Arena"
       title="Scale & Tournaments"
       stagger
+      collapsible
     >
       <ul className="grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2">
         {eventCategories.map((category) => (

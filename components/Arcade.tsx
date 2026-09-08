@@ -78,6 +78,7 @@ export function Arcade() {
       id="arcade"
       eyebrow="Arcade"
       title="Play a Round"
+      collapsible
     >
       <p className="-mt-4 mb-8 max-w-2xl text-sm leading-relaxed text-muted">
         A few interactive mini-games from the world of platform leadership.

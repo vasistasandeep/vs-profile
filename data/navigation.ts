@@ -10,8 +10,6 @@ import type { NavLink } from "@/types/content";
 export const navLinks: NavLink[] = [
   { label: "Overview", targetId: "#overview" },
   { label: "Experience", targetId: "#experience" },
-  { label: "Scale", targetId: "#tournaments" },
-  { label: "Architecture", targetId: "#architecture" },
   { label: "Case Studies", targetId: "#case-studies" },
   { label: "Projects", targetId: "#projects" },
   { label: "Education", targetId: "#education" },

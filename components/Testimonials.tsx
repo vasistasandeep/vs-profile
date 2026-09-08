@@ -41,6 +41,7 @@ export function Testimonials() {
       id="endorsements"
       eyebrow="In their words"
       title="What people I've worked with say"
+      collapsible
     >
       <p className="mb-8 max-w-2xl text-sm leading-relaxed text-muted">
         Reflections gathered from the engineering, product, and delivery leaders

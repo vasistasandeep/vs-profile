@@ -12,12 +12,11 @@
 //   #tournaments  -> EventsGrid        (renders its own <section id="tournaments">)
 //   #architecture -> <section> group   (ArchitectureFlowDiagram + ArchitectureTabs + CostCalculator)
 //   #case-studies -> <section> group   (PlatformEvolution + CaseStudyDrawer)
-//   #projects     -> Projects           (renders its own <section id="projects">)
+//   #projects     -> Projects          (real GitHub work; absorbs the former Labs section)
 //   #governance   -> <section>         (Manifesto)
 //   #education    -> Education          (renders its own <section id="education">)
 //   #endorsements -> Testimonials      (renders its own <section id="endorsements">)
 //   #contact      -> Contact           (renders its own <section id="contact">)
-//   #labs         -> Labs              (renders its own <section id="labs">)
 //   #arcade       -> Arcade            (renders its own <section id="arcade">)
 //
 // Grouped sections carry `scroll-mt-24` so the smooth-scroll offset clears the
@@ -37,7 +36,6 @@ import Manifesto from "@/components/Manifesto";
 import Education from "@/components/Education";
 import Certifications from "@/components/Certifications";
 import Testimonials from "@/components/Testimonials";
-import Labs from "@/components/Labs";
 import Arcade from "@/components/Arcade";
 import Contact from "@/components/Contact";
 
@@ -84,9 +82,6 @@ export default function HomePage() {
 
         {/* #endorsements — Testimonials owns its <section id="endorsements"> */}
         <Testimonials />
-
-        {/* #labs — Labs owns its <section id="labs"> */}
-        <Labs />
 
         {/* #arcade — Arcade owns its <section id="arcade"> */}
         <Arcade />

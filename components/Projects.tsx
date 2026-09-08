@@ -82,7 +82,7 @@ export function Projects() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <SectionWrapper id="projects" eyebrow="Selected Work" title="Projects">
+    <SectionWrapper id="projects" eyebrow="Selected Work" title="Projects" collapsible>
       {/* Scoped keyframes for the modal fade + rise. Radix waits for these to
           finish before unmounting on close. */}
       <style>{modalKeyframes}</style>

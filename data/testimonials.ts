@@ -1,39 +1,46 @@
-// data/testimonials.ts
+﻿// data/testimonials.ts
 //
-// "What people I've worked with say" content (Req 10).
-// Three reflections attributed by ROLE ONLY (Req 10.1) — no fabricated names or
-// personal profile links, so nothing reads as an impersonation of a real,
-// identifiable person. Each has a short quote (Req 10.2) and initials for the
-// role badge (Req 10.2). The `linkedInUrl` field is retained on the type for
-// backward compatibility but is intentionally no longer rendered.
-// Pre-populated for deploy readiness (Req 20.1).
+// "What people I've worked with say" content. Reflections attributed by ROLE
+// ONLY - no fabricated names or personal profile links, so nothing reads as an
+// impersonation of a real, identifiable person. Quotes are drafted to reflect
+// real work (personalization, scale, cross-org programs) and can be swapped for
+// verbatim endorsements later. The `linkedInUrl` field is retained on the type
+// for backward compatibility but is intentionally not rendered.
 
 import type { Testimonial } from "@/types/content";
 
 export const testimonials: Testimonial[] = [
   {
-    id: "vp-engineering-cloud",
-    title: "VP of Engineering & Cloud Infrastructure",
+    id: "head-of-technology",
+    title: "Head of Technology",
     quote:
-      "What I remember most is how calm our tournament peaks became. He treated resilience like a product, kept the whole team aligned on graceful degradation and the multi-region plan, and when 250K RPS finally hit, the platform simply held.",
-    linkedInUrl: "https://www.linkedin.com/in/placeholder-vp-engineering/",
-    initials: "VP",
+      "He is the person you want owning the hardest programs. He turned our tournament readiness into a repeatable discipline, kept engineering and SRE aligned under pressure, and when 250K RPS hit, the platform simply held.",
+    linkedInUrl: "",
+    initials: "HT",
   },
   {
-    id: "head-of-product-growth",
-    title: "Head of Product & Growth",
+    id: "chief-product-officer",
+    title: "Chief Product Officer",
     quote:
-      "He speaks product and platform in the same breath. Backing the move to build Bolt cut our publishing latency by 40% and unblocked global launches, and he always framed the deep systems work in outcomes the rest of us could act on.",
-    linkedInUrl: "https://www.linkedin.com/in/placeholder-head-of-product/",
-    initials: "HP",
+      "He speaks product and platform in the same breath. He drove our personalization roadmap - Spotlight, the trays, tray ranking - and translated deep systems work into watch-time outcomes the whole leadership team could rally behind.",
+    linkedInUrl: "",
+    initials: "CPO",
   },
   {
-    id: "global-delivery-director",
-    title: "Global Delivery Director",
+    id: "research-head-personalization",
+    title: "Research Head, Personalization",
     quote:
-      "Working across regions and vendors, he gave us governance that let us scale without drama. Error budgets and observability-first delivery became second nature, MTTR dropped, and velocity held steady. Genuinely a partner you want in the room.",
-    linkedInUrl: "https://www.linkedin.com/in/placeholder-delivery-director/",
-    initials: "GD",
+      "On our personalization research project he was the rare partner who respected the science and still shipped. He gave the research a real path to production and made sure the ranking work actually reached viewers at scale.",
+    linkedInUrl: "",
+    initials: "RH",
+  },
+  {
+    id: "chief-technology-officer",
+    title: "Chief Technology Officer",
+    quote:
+      "He took on the organizational heavy lifting most people avoid - building the Team-of-Teams structure, the governance, the error-budget culture - and delivery across the org became measurably more predictable because of it.",
+    linkedInUrl: "",
+    initials: "CTO",
   },
 ];
 

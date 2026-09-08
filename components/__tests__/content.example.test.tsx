@@ -260,7 +260,7 @@ describe("Credentials — seven certification names (Req 9.1)", () => {
 });
 
 describe("Testimonials — role-only attribution titles (Req 10.1)", () => {
-  it("renders the section heading and all three role-only attribution titles", () => {
+  it("renders the section heading and all role-only attribution titles", () => {
     render(<Testimonials />);
     expect(
       screen.getByText("What people I've worked with say"),
@@ -268,11 +268,14 @@ describe("Testimonials — role-only attribution titles (Req 10.1)", () => {
     for (const testimonial of testimonials) {
       expect(screen.getByText(testimonial.title)).toBeInTheDocument();
     }
+    expect(screen.getByText("Head of Technology")).toBeInTheDocument();
+    expect(screen.getByText("Chief Product Officer")).toBeInTheDocument();
     expect(
-      screen.getByText("VP of Engineering & Cloud Infrastructure"),
+      screen.getByText("Research Head, Personalization"),
     ).toBeInTheDocument();
-    expect(screen.getByText("Head of Product & Growth")).toBeInTheDocument();
-    expect(screen.getByText("Global Delivery Director")).toBeInTheDocument();
+    expect(
+      screen.getByText("Chief Technology Officer"),
+    ).toBeInTheDocument();
   });
 });
 

@@ -23,7 +23,13 @@ export function Experience() {
   const itemVariants = useMotionSafe(staggerItem);
 
   return (
-    <SectionWrapper id="experience" eyebrow="Career" title="Experience" stagger>
+    <SectionWrapper
+      id="experience"
+      eyebrow="Career"
+      title="Experience"
+      stagger
+      collapsible
+    >
       <ol className="flex flex-col gap-6">
         {experience.map((group) => (
           <motion.li key={group.id} variants={itemVariants}>
