@@ -13,6 +13,7 @@ export const navLinks: NavLink[] = [
   { label: "Scale", targetId: "#tournaments" },
   { label: "Architecture", targetId: "#architecture" },
   { label: "Case Studies", targetId: "#case-studies" },
+  { label: "Projects", targetId: "#projects" },
   { label: "Education", targetId: "#education" },
   { label: "Arcade", targetId: "#arcade" },
   { label: "Contact", targetId: "#contact" },

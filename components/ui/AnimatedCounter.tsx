@@ -108,31 +108,48 @@ export function AnimatedCounter({
   // if `inView` briefly re-fires (Req 2.6, Property 13).
   const hasAnimated = useRef(false);
 
+  // Reduced motion: show the final value immediately.
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setDisplay(resolvedTarget);
-      return;
-    }
-    if (!inView || hasAnimated.current) return;
-    hasAnimated.current = true;
+    if (prefersReducedMotion) setDisplay(resolvedTarget);
+  }, [prefersReducedMotion, resolvedTarget]);
 
+  // Count-up runner (idempotent via the run-once latch).
+  useEffect(() => {
+    if (prefersReducedMotion || hasAnimated.current) return;
+
+    // Animate when the element is in view. As a robustness fallback (some
+    // layouts never fire useInView because an ancestor stays transformed),
+    // also start after a short mount delay so the number always renders.
+    const shouldStartNow = inView;
+    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
     let rafId = 0;
-    const start = performance.now();
 
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      const progress = Math.min(1, elapsed / resolvedDuration);
-      const eased = easeOutCubic(progress);
-      setDisplay(resolvedTarget * eased);
-      if (progress < 1) {
-        rafId = requestAnimationFrame(tick);
-      } else {
-        setDisplay(resolvedTarget);
-      }
+    const run = () => {
+      if (hasAnimated.current) return;
+      hasAnimated.current = true;
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min(1, (now - start) / resolvedDuration);
+        setDisplay(resolvedTarget * easeOutCubic(progress));
+        if (progress < 1) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          setDisplay(resolvedTarget);
+        }
+      };
+      rafId = requestAnimationFrame(tick);
     };
 
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
+    if (shouldStartNow) {
+      run();
+    } else {
+      fallbackTimer = setTimeout(run, 600);
+    }
+
+    return () => {
+      if (fallbackTimer) clearTimeout(fallbackTimer);
+      cancelAnimationFrame(rafId);
+    };
   }, [inView, prefersReducedMotion, resolvedTarget, resolvedDuration]);
 
   return (

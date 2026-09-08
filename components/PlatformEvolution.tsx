@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -8,33 +8,18 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { toggleView, type EvolutionView } from "@/components/ui/state";
 
 /**
- * PlatformEvolution — Before/After architectural transformations (Req 4).
+ * PlatformEvolution - Before/After architectural transformations.
  *
- * Renders the six evolution items from `data/evolution.ts`. Each item carries
- * its own Before/After control; the displayed detail cross-fades between the
- * `before` and `after` text when toggled (Req 4.1, 4.8).
- *
- * Per-item view is tracked as a `Record<string, EvolutionView>` keyed by item
- * id. Items default to the "before" view; toggling flips a single item via the
- * pure {@link toggleView} helper (Req 14.2 — interactive state managed with
- * React state).
- *
- * The detail cross-fades using Framer Motion `AnimatePresence`. When the
- * visitor prefers reduced motion (`useReducedMotion`), the transition duration
- * collapses to zero so content swaps instantly with no motion (Req 4.9, 17.4).
- *
- * NOTE: This component is part of the grouped `#case-studies` section (rendered
- * alongside `CaseStudyDrawer` by the page composition). It therefore does NOT
- * declare a top-level `id="case-studies"` / `SectionWrapper`; it renders as a
- * titled inner block ("Platform Evolution") so the page can own the section id.
+ * Each item has its own Before/After control. The two states are now visually
+ * differentiated: the card border, the active toggle, and a state badge above
+ * the detail all shift between an amber "Before" (the problem) and an emerald
+ * "After" (the solution), so it is obvious at a glance which state you are
+ * reading. The detail cross-fades on toggle (instant under reduced motion).
  */
 export function PlatformEvolution() {
-  // Per-item Before/After view. Absent entries default to "before".
   const [views, setViews] = useState<Record<string, EvolutionView>>({});
-
   const prefersReducedMotion = useReducedMotion();
 
-  // Instant swap under reduced motion; short cross-fade otherwise (Req 4.9).
   const transition = prefersReducedMotion
     ? { duration: 0 }
     : { duration: 0.25, ease: "easeOut" as const };
@@ -57,6 +42,11 @@ export function PlatformEvolution() {
         <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           Platform Evolution
         </h3>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+          Toggle each card between the <span className="font-medium text-amber-400">Before</span>{" "}
+          (the problem we inherited) and the{" "}
+          <span className="font-medium text-accent">After</span> (what we shipped).
+        </p>
       </header>
 
       <ul className="grid list-none grid-cols-1 gap-6 p-0 lg:grid-cols-2">
@@ -70,20 +60,16 @@ export function PlatformEvolution() {
           return (
             <li key={item.id}>
               <GlassCard
-                glow={isAfter ? "emerald" : "none"}
-                className="flex h-full flex-col p-6"
+                className={`flex h-full flex-col p-6 transition-colors ${
+                  isAfter ? "border-accent/40" : "border-amber-500/30"
+                }`}
               >
                 <div className="flex items-start justify-between gap-4">
-                  <h4
-                    id={labelId}
-                    className="text-lg font-semibold text-fg"
-                  >
+                  <h4 id={labelId} className="text-lg font-semibold text-fg">
                     {item.title}
                   </h4>
 
-                  {/* Before/After toggle. Two buttons form a labelled group so
-                      the current state is announced and both states are
-                      keyboard reachable (Req 4.8, 17.1, 17.2). */}
+                  {/* Before/After toggle with clear active states. */}
                   <div
                     role="group"
                     aria-labelledby={labelId}
@@ -96,9 +82,9 @@ export function PlatformEvolution() {
                       }}
                       aria-pressed={!isAfter}
                       aria-label={`Show the before state of ${item.title}`}
-                      className={`px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      className={`px-3 py-1 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                         !isAfter
-                          ? "bg-surface2 text-fg"
+                          ? "bg-amber-500/20 text-amber-400"
                           : "text-muted hover:text-fg"
                       }`}
                     >
@@ -111,9 +97,9 @@ export function PlatformEvolution() {
                       }}
                       aria-pressed={isAfter}
                       aria-label={`Show the after state of ${item.title}`}
-                      className={`px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      className={`px-3 py-1 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                         isAfter
-                          ? "bg-accent/15 text-accent"
+                          ? "bg-accent/20 text-accent"
                           : "text-muted hover:text-fg"
                       }`}
                     >
@@ -124,7 +110,7 @@ export function PlatformEvolution() {
 
                 <div className="relative mt-4 flex-1">
                   <AnimatePresence mode="wait" initial={false}>
-                    <motion.p
+                    <motion.div
                       key={view}
                       id={detailId}
                       aria-live="polite"
@@ -132,10 +118,26 @@ export function PlatformEvolution() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={transition}
-                      className="text-sm leading-relaxed text-muted"
                     >
-                      {detail}
-                    </motion.p>
+                      <span
+                        className={`mb-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-wide ${
+                          isAfter
+                            ? "bg-accent/15 text-accent"
+                            : "bg-amber-500/15 text-amber-400"
+                        }`}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={`h-1.5 w-1.5 rounded-full ${
+                            isAfter ? "bg-accent" : "bg-amber-400"
+                          }`}
+                        />
+                        {isAfter ? "After" : "Before"}
+                      </span>
+                      <p className="text-sm leading-relaxed text-muted">
+                        {detail}
+                      </p>
+                    </motion.div>
                   </AnimatePresence>
                 </div>
               </GlassCard>

@@ -52,7 +52,7 @@ export function Hero() {
     <SectionWrapper
       id="overview"
       stagger
-      className="relative isolate overflow-hidden py-24 sm:py-32"
+      className="relative isolate overflow-hidden py-14 sm:py-20"
     >
       {/* Aurora backdrop: soft radial mesh-gradient, image-free and GPU-cheap.
           Absolutely positioned behind the content, non-interactive. */}
@@ -64,7 +64,7 @@ export function Hero() {
       <div className="flex flex-col items-center text-center">
         {/* Circular headshot avatar. next/image with fill + priority; a plain
             accent ring (no glow shadow, per the dark-only token system). */}
-        <motion.div variants={itemVariants} className="mb-8">
+        <motion.div variants={itemVariants} className="mb-6">
           <div className="relative h-28 w-28 overflow-hidden rounded-full border border-accent/40 sm:h-32 sm:w-32">
             <Image
               src={site.portrait.src}
@@ -88,7 +88,7 @@ export function Hero() {
         {/* Headline — the emphasis phrase shimmers via .text-gradient. */}
         <motion.h1
           variants={itemVariants}
-          className="mt-8 max-w-4xl text-[clamp(2.25rem,6vw,3.75rem)] font-bold leading-[1.05] tracking-tight text-fg"
+          className="mt-6 max-w-4xl text-[clamp(2.25rem,6vw,3.75rem)] font-bold leading-[1.05] tracking-tight text-fg"
         >
           {HEADLINE_LEAD}
           <span className="text-gradient">{HEADLINE_EMPHASIS}</span>
@@ -97,7 +97,7 @@ export function Hero() {
         {/* Sub-headline */}
         <motion.p
           variants={itemVariants}
-          className="mt-6 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl"
+          className="mt-5 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl"
         >
           {SUBHEADLINE}
         </motion.p>
@@ -106,7 +106,7 @@ export function Hero() {
             expanding to five on desktop. */}
         <motion.dl
           variants={itemVariants}
-          className="mt-[clamp(2.5rem,6vw,3.5rem)] grid w-full max-w-5xl grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5"
+          className="mt-10 grid w-full max-w-5xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5"
         >
           {metrics.map((metric) => (
             <div key={metric.id} className="flex flex-col items-center">

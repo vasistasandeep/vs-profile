@@ -126,6 +126,7 @@ describe("smoke: semantic page structure (Req 15.3)", () => {
       "tournaments",
       "architecture",
       "case-studies",
+      "projects",
       "governance",
       "education",
       "endorsements",

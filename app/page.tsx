@@ -12,7 +12,8 @@
 //   #tournaments  -> EventsGrid        (renders its own <section id="tournaments">)
 //   #architecture -> <section> group   (ArchitectureFlowDiagram + ArchitectureTabs + CostCalculator)
 //   #case-studies -> <section> group   (PlatformEvolution + CaseStudyDrawer)
-//   #governance   -> <section> group   (Manifesto + Credentials)
+//   #projects     -> Projects           (renders its own <section id="projects">)
+//   #governance   -> <section>         (Manifesto)
 //   #education    -> Education          (renders its own <section id="education">)
 //   #endorsements -> Testimonials      (renders its own <section id="endorsements">)
 //   #contact      -> Contact           (renders its own <section id="contact">)
@@ -31,8 +32,8 @@ import ArchitectureTabs from "@/components/ArchitectureTabs";
 import CostCalculator from "@/components/CostCalculator";
 import PlatformEvolution from "@/components/PlatformEvolution";
 import CaseStudyDrawer from "@/components/CaseStudyDrawer";
+import Projects from "@/components/Projects";
 import Manifesto from "@/components/Manifesto";
-import Credentials from "@/components/Credentials";
 import Education from "@/components/Education";
 import Testimonials from "@/components/Testimonials";
 import Labs from "@/components/Labs";
@@ -65,10 +66,13 @@ export default function HomePage() {
           <CaseStudyDrawer />
         </section>
 
-        {/* #governance — group the leadership manifesto and the certifications */}
-        <section id="governance" className="scroll-mt-24 flex flex-col gap-16">
+        {/* #projects — Projects owns its <section id="projects"> (real GitHub work) */}
+        <Projects />
+
+        {/* #governance — leadership manifesto (certifications live in the
+            Education & Credentials section to avoid duplication) */}
+        <section id="governance" className="scroll-mt-24">
           <Manifesto />
-          <Credentials />
         </section>
 
         {/* #education — Education owns its <section id="education"> */}

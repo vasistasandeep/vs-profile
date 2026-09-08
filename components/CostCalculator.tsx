@@ -139,11 +139,11 @@ export function CostCalculator() {
                 onValueChange={(values) => setConcurrency(values[0])}
                 aria-labelledby="concurrency-label"
               >
-                <Slider.Track className="relative h-1.5 w-full grow rounded-full bg-surface2">
+                <Slider.Track className="relative h-2.5 w-full grow rounded-full bg-surface2 ring-1 ring-inset ring-border">
                   <Slider.Range className="absolute h-full rounded-full bg-gradient-to-r from-accent to-accent2" />
                 </Slider.Track>
                 <Slider.Thumb
-                  className="block h-5 w-5 rounded-full border border-accent bg-surface shadow-card outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent/70"
+                  className="block h-6 w-6 cursor-grab rounded-full border-2 border-white bg-emerald-500 outline-none ring-2 ring-emerald-500/30 transition-transform hover:scale-110 active:cursor-grabbing focus-visible:ring-4 focus-visible:ring-accent/50"
                   aria-label="Peak concurrency in users"
                   aria-valuetext={describeUsers(concurrency)}
                 />

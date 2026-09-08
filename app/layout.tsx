@@ -12,6 +12,7 @@ import { Inter } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppWidget from "@/components/ui/WhatsAppWidget";
 import { site } from "@/data/site";
 import { education } from "@/data/education";
 
@@ -158,6 +159,8 @@ export default function RootLayout({
         {/* Offset for the fixed 72px navbar (Req 1.1). */}
         <div className="pt-[72px]">{children}</div>
         <Footer />
+        {/* Global floating WhatsApp chat widget (client-only). */}
+        <WhatsAppWidget />
       </body>
     </html>
   );

@@ -104,7 +104,7 @@ export function CaseStudyDrawer() {
                 <Dialog.Portal>
                   {/* Pointer-blocking overlay makes background inert (Req 8.7). */}
                   <Dialog.Overlay
-                    className="fixed inset-0 z-40 bg-slate-950/50 data-[state=open]:animate-cs-overlay-in data-[state=closed]:animate-cs-overlay-out"
+                    className="fixed inset-0 z-[90] bg-black/80 backdrop-blur-sm data-[state=open]:animate-cs-overlay-in data-[state=closed]:animate-cs-overlay-out"
                     style={overlayAnimationVars}
                   />
 
@@ -113,7 +113,7 @@ export function CaseStudyDrawer() {
                   <Dialog.Content
                     aria-labelledby={titleId}
                     aria-describedby={descId}
-                    className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col border-l border-border bg-surface shadow-2xl focus:outline-none data-[state=open]:animate-cs-drawer-in data-[state=closed]:animate-cs-drawer-out sm:max-w-lg"
+                    className="fixed inset-y-0 right-0 z-[100] flex h-full w-full max-w-md flex-col border-l border-border bg-background focus:outline-none data-[state=open]:animate-cs-drawer-in data-[state=closed]:animate-cs-drawer-out sm:max-w-lg"
                     style={drawerAnimationVars}
                   >
                     <div className="flex items-start justify-between gap-4 border-b border-border p-6">

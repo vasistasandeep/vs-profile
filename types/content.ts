@@ -47,6 +47,18 @@ export interface CaseStudy {
   body: string[];             // expanded paragraphs shown in drawer
 }
 
+// A real GitHub project showcased in the Projects section (case-study styled).
+export interface Project {
+  id: string;
+  name: string;
+  domain: string;       // e.g. "OTT Observability"
+  abstract: string;     // one-line, recruiter-friendly summary (card + modal)
+  body: string[];       // 2-3 short paragraphs shown in the details modal
+  repoUrl: string;      // https://github.com/...
+  demoUrl?: string;     // optional live demo
+  tags: string[];       // tech/domain chips
+}
+
 export interface Credential { id: string; name: string; }
 
 // Detailed credential (resume-accurate): name plus optional certificate id.
