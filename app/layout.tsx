@@ -4,8 +4,8 @@
 // Twitter card (Req 15.1), embeds JSON-LD Person + ProfilePage structured
 // data (Req 15.2), loads the sans font via next/font exposing the
 // `--font-sans` CSS variable consumed by tailwind.config.ts (Req 16.2, 16.3),
-// applies the global `.bg-grid` background (Req 19.1, 19.4), and frames the
-// page with the fixed Navbar and the Footer.
+// applies the clean token-based background, wires the light/dark theme with a
+// no-flash init script, and frames the page with the fixed Navbar and Footer.
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -87,8 +87,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-grid min-h-screen font-sans text-slate-400 antialiased">
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        {/* No-flash theme init: before first paint, apply the persisted theme
+            (default LIGHT when unset) by toggling the `dark` class on
+            <html>. Runs synchronously so there is no light→dark flicker. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen bg-background font-sans text-muted antialiased">
         {/* JSON-LD Person + ProfilePage structured data (Req 15.2) */}
         <script
           type="application/ld+json"

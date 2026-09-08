@@ -85,8 +85,8 @@ export function ResumeButton({
         aria-busy={checking}
         className={[
           "inline-flex items-center justify-center rounded-full",
-          "bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950",
-          "transition-colors hover:bg-emerald-400 disabled:opacity-70",
+          "bg-emerald-600 px-4 py-2 text-sm font-semibold text-white",
+          "transition-colors hover:bg-emerald-500 disabled:opacity-70",
           className,
         ]
           .filter(Boolean)
@@ -97,7 +97,7 @@ export function ResumeButton({
 
       {showFallback && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4"
           onClick={closeFallback}
         >
           <div
@@ -105,16 +105,16 @@ export function ResumeButton({
             aria-modal="true"
             aria-labelledby="resume-fallback-title"
             aria-describedby="resume-fallback-desc"
-            className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-900 p-6 shadow-glow-emerald"
+            className="w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-card"
             onClick={(e) => e.stopPropagation()}
           >
             <h2
               id="resume-fallback-title"
-              className="text-lg font-semibold text-white"
+              className="text-lg font-semibold text-fg"
             >
               Resume temporarily unavailable
             </h2>
-            <p id="resume-fallback-desc" className="mt-2 text-sm text-slate-400">
+            <p id="resume-fallback-desc" className="mt-2 text-sm text-muted">
               The resume file could not be loaded right now. You can request a
               copy by email and I&apos;ll send it over.
             </p>
@@ -122,13 +122,13 @@ export function ResumeButton({
               <button
                 type="button"
                 onClick={closeFallback}
-                className="rounded-full border border-white/10 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5"
+                className="rounded-full border border-border px-4 py-2 text-sm font-medium text-muted transition-colors hover:bg-surface2"
               >
                 Close
               </button>
               <a
                 href={mailtoHref}
-                className="inline-flex items-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-400"
+                className="inline-flex items-center rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
               >
                 Email {site.primaryEmail}
               </a>

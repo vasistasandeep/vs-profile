@@ -55,10 +55,10 @@ const LOCATION_LINE =
   "Bengaluru, India (Open to Global Leadership & Advisory Roles)";
 
 const inputBase =
-  "w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-white " +
-  "placeholder:text-white/40 outline-none transition focus:border-emerald-400/60 " +
-  "focus:ring-1 focus:ring-emerald-400/40";
-const inputInvalid = "border-red-400/60 focus:border-red-400/60 focus:ring-red-400/40";
+  "w-full rounded-lg border border-border bg-surface2 px-3 py-2 text-sm text-fg " +
+  "placeholder:text-muted outline-none transition focus:border-accent/60 " +
+  "focus:ring-1 focus:ring-accent/40";
+const inputInvalid = "border-red-500/60 focus:border-red-500/60 focus:ring-red-500/40";
 
 export function Contact() {
   const [values, setValues] = useState<ContactValues>(INITIAL_VALUES);
@@ -146,8 +146,8 @@ export function Contact() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Column 1 — direct channels (Req 11.1) */}
         <GlassCard className="p-6">
-          <h3 className="text-lg font-semibold text-white">Direct Channels</h3>
-          <p className="mt-2 text-sm text-white/60">
+          <h3 className="text-lg font-semibold text-fg">Direct Channels</h3>
+          <p className="mt-2 text-sm text-muted">
             Reach out directly for platform architecture, advisory, or
             leadership conversations.
           </p>
@@ -157,23 +157,23 @@ export function Contact() {
               href={site.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white transition hover:border-emerald-400/60 focus:border-emerald-400/60 focus:outline-none focus:ring-1 focus:ring-emerald-400/40"
+              className="flex items-center gap-3 rounded-lg border border-border bg-surface2 px-4 py-3 text-sm text-fg transition hover:border-accent/60 focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/40"
             >
-              <Linkedin className="h-5 w-5 text-emerald-400" aria-hidden="true" />
+              <Linkedin className="h-5 w-5 text-accent" aria-hidden="true" />
               <span>Connect on LinkedIn</span>
             </a>
 
             <a
               href={`mailto:${site.primaryEmail}`}
-              className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white transition hover:border-emerald-400/60 focus:border-emerald-400/60 focus:outline-none focus:ring-1 focus:ring-emerald-400/40"
+              className="flex items-center gap-3 rounded-lg border border-border bg-surface2 px-4 py-3 text-sm text-fg transition hover:border-accent/60 focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/40"
             >
-              <Mail className="h-5 w-5 text-emerald-400" aria-hidden="true" />
+              <Mail className="h-5 w-5 text-accent" aria-hidden="true" />
               <span>{site.primaryEmail}</span>
             </a>
 
-            <p className="flex items-start gap-3 rounded-lg px-4 py-3 text-sm text-white/70">
+            <p className="flex items-start gap-3 rounded-lg px-4 py-3 text-sm text-muted">
               <MapPin
-                className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400"
+                className="mt-0.5 h-5 w-5 shrink-0 text-accent"
                 aria-hidden="true"
               />
               <span>{LOCATION_LINE}</span>
@@ -183,7 +183,7 @@ export function Contact() {
 
         {/* Column 2 — Contact_Form (Req 11.2–11.9) */}
         <GlassCard className="p-6">
-          <h3 className="text-lg font-semibold text-white">
+          <h3 className="text-lg font-semibold text-fg">
             Send a Message
           </h3>
 
@@ -192,9 +192,9 @@ export function Contact() {
             <div>
               <label
                 htmlFor="contact-name"
-                className="mb-1 block text-sm font-medium text-white/80"
+                className="mb-1 block text-sm font-medium text-fg"
               >
-                Name <span className="text-emerald-400">*</span>
+                Name <span className="text-accent">*</span>
               </label>
               <input
                 id="contact-name"
@@ -211,7 +211,7 @@ export function Contact() {
               {errors.name && (
                 <p
                   id="contact-name-error"
-                  className="mt-1 text-xs text-red-400"
+                  className="mt-1 text-xs text-red-600 dark:text-red-400"
                 >
                   {errors.name}
                 </p>
@@ -222,9 +222,9 @@ export function Contact() {
             <div>
               <label
                 htmlFor="contact-email"
-                className="mb-1 block text-sm font-medium text-white/80"
+                className="mb-1 block text-sm font-medium text-fg"
               >
-                Work Email <span className="text-emerald-400">*</span>
+                Work Email <span className="text-accent">*</span>
               </label>
               <input
                 id="contact-email"
@@ -243,7 +243,7 @@ export function Contact() {
               {errors.email && (
                 <p
                   id="contact-email-error"
-                  className="mt-1 text-xs text-red-400"
+                  className="mt-1 text-xs text-red-600 dark:text-red-400"
                 >
                   {errors.email}
                 </p>
@@ -254,7 +254,7 @@ export function Contact() {
             <div>
               <label
                 htmlFor="contact-organization"
-                className="mb-1 block text-sm font-medium text-white/80"
+                className="mb-1 block text-sm font-medium text-fg"
               >
                 Organization
               </label>
@@ -276,7 +276,7 @@ export function Contact() {
               {errors.organization && (
                 <p
                   id="contact-organization-error"
-                  className="mt-1 text-xs text-red-400"
+                  className="mt-1 text-xs text-red-600 dark:text-red-400"
                 >
                   {errors.organization}
                 </p>
@@ -287,9 +287,9 @@ export function Contact() {
             <div>
               <label
                 htmlFor="contact-message"
-                className="mb-1 block text-sm font-medium text-white/80"
+                className="mb-1 block text-sm font-medium text-fg"
               >
-                Message <span className="text-emerald-400">*</span>
+                Message <span className="text-accent">*</span>
               </label>
               <textarea
                 id="contact-message"
@@ -310,7 +310,7 @@ export function Contact() {
               {errors.message && (
                 <p
                   id="contact-message-error"
-                  className="mt-1 text-xs text-red-400"
+                  className="mt-1 text-xs text-red-600 dark:text-red-400"
                 >
                   {errors.message}
                 </p>
@@ -320,7 +320,7 @@ export function Contact() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-accent/60 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isPending ? "Sending…" : "Send Message"}
             </button>
@@ -329,22 +329,22 @@ export function Contact() {
                 for assistive tech (Req 17.2). */}
             <div aria-live="polite" role="status" className="min-h-[1.25rem]">
               {status === "pending" && (
-                <p className="text-sm text-white/70">
+                <p className="text-sm text-muted">
                   Sending your message…
                 </p>
               )}
               {status === "success" && (
-                <p className="text-sm text-emerald-400">
+                <p className="text-sm text-accent">
                   Message sent. Thanks for reaching out — I&apos;ll respond
                   shortly.
                 </p>
               )}
               {status === "error" && (
-                <p className="text-sm text-red-400">
+                <p className="text-sm text-red-600 dark:text-red-400">
                   Something went wrong sending your message. Please email{" "}
                   <a
                     href={fallbackMailto}
-                    className="font-medium underline decoration-red-400/60 underline-offset-2 hover:text-red-300"
+                    className="font-medium underline decoration-red-500/60 underline-offset-2 hover:opacity-80"
                   >
                     {site.primaryEmail}
                   </a>{" "}

@@ -41,10 +41,10 @@ export function ArchitectureTabs() {
       viewport={{ once: true }}
     >
       <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
+        <p className="text-sm font-medium uppercase tracking-widest text-accent">
           Playbook & Toolkit
         </p>
-        <h3 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
+        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           Architectural Playbook & Observability Toolkit
         </h3>
       </header>
@@ -52,13 +52,13 @@ export function ArchitectureTabs() {
       <Tabs.Root defaultValue={defaultTab} className="flex flex-col">
         <Tabs.List
           aria-label="Architectural playbook categories"
-          className="flex flex-wrap gap-2 border-b border-white/10"
+          className="flex flex-wrap gap-2 border-b border-border"
         >
           {architectureTabs.map((tab) => (
             <Tabs.Trigger
               key={tab.id}
               value={tab.id}
-              className="-mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-slate-400 outline-none transition-colors hover:text-slate-200 focus-visible:text-white focus-visible:ring-2 focus-visible:ring-emerald-400/60 data-[state=active]:border-emerald-400 data-[state=active]:text-emerald-300"
+              className="-mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-muted outline-none transition-colors hover:text-fg focus-visible:text-fg focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=active]:border-accent data-[state=active]:text-accent"
             >
               {tab.label}
             </Tabs.Trigger>
@@ -69,18 +69,18 @@ export function ArchitectureTabs() {
           <Tabs.Content
             key={tab.id}
             value={tab.id}
-            className="mt-6 outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60"
+            className="mt-6 outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           >
             <GlassCard className="p-6">
               <ul className="grid list-none grid-cols-1 gap-x-8 gap-y-3 p-0 sm:grid-cols-2">
                 {tab.items.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-2 text-sm leading-relaxed text-slate-300"
+                    className="flex gap-2 text-sm leading-relaxed text-muted"
                   >
                     <span
                       aria-hidden="true"
-                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400"
+                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent2"
                     />
                     <span>{item}</span>
                   </li>

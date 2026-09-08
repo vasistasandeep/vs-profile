@@ -31,10 +31,10 @@ export function Manifesto() {
   return (
     <div className="scroll-mt-24">
       <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
+        <p className="text-sm font-medium uppercase tracking-widest text-accent">
           Governance
         </p>
-        <h2 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
+        <h2 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           Platform Leadership Manifesto
         </h2>
       </header>
@@ -49,8 +49,8 @@ export function Manifesto() {
         {manifesto.map((card) => (
           <motion.li key={card.id} variants={itemVariants}>
             <GlassCard className="h-full p-6">
-              <h3 className="text-lg font-semibold text-white">{card.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+              <h3 className="text-lg font-semibold text-fg">{card.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">
                 {card.principle}
               </p>
             </GlassCard>

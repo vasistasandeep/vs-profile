@@ -3,12 +3,21 @@ import type { Config } from "tailwindcss";
 /**
  * Design tokens for the Executive Portfolio Site.
  *
- * Dark-mode-first theme (Req 19.1): obsidian / slate-950 background.
- * Glassmorphism cards with white/10 borders (Req 19.2).
- * Emerald + cyan accent glows, white headings, slate-400 body (Req 19.3).
- * Subtle grid texture surfaces (Req 19.4) — the `.bg-grid` utility lives in globals.css.
- * `tabular-nums` support for metric alignment (Req 16.3).
+ * The theme is driven by semantic CSS variables declared in app/globals.css
+ * (`:root` = LIGHT default, `.dark` = dark). Each token is an RGB triple so the
+ * Tailwind `<utility>-<token>/<opacity>` syntax works (e.g. `bg-surface/85`,
+ * `border-accent/40`). Components use the semantic aliases below —
+ * `bg-background`, `bg-surface`, `bg-surface2`, `border-border`, `text-fg`,
+ * `text-muted`, `text-accent`, `text-accent2` — so a single class set reads
+ * correctly in both themes.
+ *
+ * `tabular-nums` support is kept for metric alignment (Req 16.3).
  */
+
+/** Build a Tailwind color that reads an RGB-triple CSS variable with opacity. */
+const tokenColor = (variable: string) =>
+  `rgb(var(${variable}) / <alpha-value>)`;
+
 const config: Config = {
   darkMode: "class",
   content: [
@@ -18,24 +27,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Obsidian / slate-950 page background (Req 19.1)
+        // Semantic theme tokens (resolve per light/dark via globals.css).
+        background: tokenColor("--background"),
+        surface: tokenColor("--surface"),
+        surface2: tokenColor("--surface-2"),
+        border: tokenColor("--border"),
+        fg: tokenColor("--text"),
+        muted: tokenColor("--text-muted"),
+        accent: tokenColor("--accent"),
+        accent2: tokenColor("--accent-2"),
+
+        // Obsidian retained for any legacy reference.
         obsidian: "#0a0f1a",
-        bg: "var(--bg)",
-      },
-      backgroundColor: {
-        bg: "var(--bg)",
       },
       boxShadow: {
-        // Soft, subtle accent glows reserved mainly for hover / active states
-        // (Req 3.7, 19.3). Low spread + low opacity keeps surfaces readable
-        // and uncluttered rather than hazy.
-        glow: "0 0 20px -8px rgba(16, 185, 129, 0.22)",
-        "glow-emerald": "0 0 20px -8px rgba(16, 185, 129, 0.22)",
-        "glow-cyan": "0 0 20px -8px rgba(34, 211, 238, 0.22)",
+        // Clean, realistic elevation driven by the --shadow-card token (soft
+        // and visible on light, subtle on dark). The former neon `glow*`
+        // tokens are aliased to `card` so any remaining references degrade to
+        // the same tasteful elevation instead of a haze.
+        card: "var(--shadow-card)",
+        glow: "var(--shadow-card)",
+        "glow-emerald": "var(--shadow-card)",
+        "glow-cyan": "var(--shadow-card)",
       },
       fontFamily: {
-        // Geist Sans (fallback Inter) is wired via next/font in app/layout.tsx.
-        // The CSS variable is referenced here so utility classes resolve correctly.
+        // Inter is wired via next/font in app/layout.tsx. The CSS variable is
+        // referenced here so utility classes resolve correctly.
         sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
       },
       fontVariantNumeric: {

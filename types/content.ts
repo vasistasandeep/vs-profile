@@ -49,6 +49,42 @@ export interface CaseStudy {
 
 export interface Credential { id: string; name: string; }
 
+// Detailed credential (resume-accurate): name plus optional certificate id.
+export interface CredentialDetail {
+  id: string;
+  name: string;         // e.g. "PMP Certified"
+  credentialId?: string; // e.g. "PMP#-3195092"
+  issuer?: string;       // e.g. "KPMG"
+}
+
+// A single professional role within a company (career timeline).
+export interface ExperienceRole {
+  id: string;
+  role: string;         // e.g. "AVP, Program Management (Tech & Product)"
+  period: string;       // e.g. "Mar 2026 – Present"
+  summary?: string;     // optional one-line role context
+  highlights: {
+    lead: string;       // bolded lead-in, e.g. "Organizational Leadership & Scale:"
+    text: string;       // the achievement detail
+  }[];
+}
+
+// A company grouping one or more roles (timeline entry).
+export interface ExperienceGroup {
+  id: string;
+  company: string;      // e.g. "Sony Pictures Networks India"
+  domain?: string;      // e.g. "OTT / Streaming"
+  roles: ExperienceRole[];
+}
+
+// An education entry.
+export interface EducationItem {
+  id: string;
+  degree: string;       // e.g. "MBA in E-Business"
+  institution: string;  // e.g. "Annamalai University"
+  year: string;         // e.g. "2022"
+}
+
 export interface Testimonial {
   id: string;
   title: string;              // executive title (attribution)

@@ -61,7 +61,7 @@ export function Hero() {
       {/* Professional headshot avatar - first staggered item. Uses next/image
           for optimization; the ring + glow match the site accent system. */}
       <motion.div variants={itemVariants} className="mb-8">
-        <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-emerald-400/40 shadow-glow-emerald sm:h-32 sm:w-32">
+        <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-accent/40 shadow-card sm:h-32 sm:w-32">
           <Image
             src={site.portrait.src}
             alt={site.portrait.alt}
@@ -76,7 +76,7 @@ export function Hero() {
       {/* Eyebrow badge (Req 2.1) */}
       <motion.p
         variants={itemVariants}
-        className="inline-flex max-w-full items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-emerald-400 backdrop-blur sm:text-sm"
+        className="inline-flex max-w-full items-center rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-accent sm:text-sm"
       >
         {EYEBROW}
       </motion.p>
@@ -85,7 +85,7 @@ export function Hero() {
           mobile → desktop without hard breakpoint jumps (Req 18.1). */}
       <motion.h1
         variants={itemVariants}
-        className="mt-8 max-w-4xl text-[clamp(2.25rem,6vw,3.75rem)] font-bold leading-[1.05] tracking-tight text-white"
+        className="mt-8 max-w-4xl text-[clamp(2.25rem,6vw,3.75rem)] font-bold leading-[1.05] tracking-tight text-fg"
       >
         {HEADLINE}
       </motion.h1>
@@ -93,7 +93,7 @@ export function Hero() {
       {/* Sub-headline (Req 2.3) */}
       <motion.p
         variants={itemVariants}
-        className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-400 sm:text-xl"
+        className="mt-6 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl"
       >
         {SUBHEADLINE}
       </motion.p>
@@ -112,9 +112,9 @@ export function Hero() {
             <dd className="flex flex-col items-center">
               <AnimatedCounter
                 metric={metric}
-                className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-[clamp(1.875rem,4vw,3rem)] font-bold text-transparent"
+                className="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-[clamp(1.875rem,4vw,3rem)] font-bold text-transparent"
               />
-              <span className="mt-2 text-sm text-slate-400">
+              <span className="mt-2 text-sm text-muted">
                 {metric.label}
               </span>
             </dd>
@@ -130,14 +130,14 @@ export function Hero() {
         <button
           type="button"
           onClick={() => scrollToSection("#architecture")}
-          className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
+          className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {PRIMARY_CTA_LABEL}
         </button>
         <button
           type="button"
           onClick={() => scrollToSection("#contact")}
-          className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
+          className="inline-flex items-center justify-center rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-fg transition-colors hover:bg-surface2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {SECONDARY_CTA_LABEL}
         </button>

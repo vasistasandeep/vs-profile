@@ -8,10 +8,12 @@
 //
 // Anchor map:
 //   #overview     -> Hero              (Hero renders its own <section id="overview">)
+//   #experience   -> Experience        (renders its own <section id="experience">)
 //   #tournaments  -> EventsGrid        (renders its own <section id="tournaments">)
 //   #architecture -> <section> group   (ArchitectureFlowDiagram + ArchitectureTabs + CostCalculator)
 //   #case-studies -> <section> group   (PlatformEvolution + CaseStudyDrawer)
 //   #governance   -> <section> group   (Manifesto + Credentials)
+//   #education    -> Education          (renders its own <section id="education">)
 //   #endorsements -> Testimonials      (renders its own <section id="endorsements">)
 //   #contact      -> Contact           (renders its own <section id="contact">)
 //   #labs         -> Labs              (renders its own <section id="labs">)
@@ -21,6 +23,7 @@
 // and must NOT be double-wrapped.
 
 import Hero from "@/components/Hero";
+import Experience from "@/components/Experience";
 import EventsGrid from "@/components/EventsGrid";
 import ArchitectureFlowDiagram from "@/components/ArchitectureFlowDiagram";
 import ArchitectureTabs from "@/components/ArchitectureTabs";
@@ -29,6 +32,7 @@ import PlatformEvolution from "@/components/PlatformEvolution";
 import CaseStudyDrawer from "@/components/CaseStudyDrawer";
 import Manifesto from "@/components/Manifesto";
 import Credentials from "@/components/Credentials";
+import Education from "@/components/Education";
 import Testimonials from "@/components/Testimonials";
 import Labs from "@/components/Labs";
 import Contact from "@/components/Contact";
@@ -39,6 +43,9 @@ export default function HomePage() {
       <div className="flex flex-col gap-24 py-16 md:gap-32 md:py-24">
         {/* #overview — Hero owns its <section id="overview"> */}
         <Hero />
+
+        {/* #experience — Experience owns its <section id="experience"> */}
+        <Experience />
 
         {/* #tournaments — EventsGrid owns its <section id="tournaments"> */}
         <EventsGrid />
@@ -61,6 +68,9 @@ export default function HomePage() {
           <Manifesto />
           <Credentials />
         </section>
+
+        {/* #education — Education owns its <section id="education"> */}
+        <Education />
 
         {/* #endorsements — Testimonials owns its <section id="endorsements"> */}
         <Testimonials />

@@ -122,10 +122,12 @@ describe("smoke: semantic page structure (Req 15.3)", () => {
     // (architecture/case-studies/governance).
     const expectedIds = [
       "overview",
+      "experience",
       "tournaments",
       "architecture",
       "case-studies",
       "governance",
+      "education",
       "endorsements",
       "contact",
       "labs",

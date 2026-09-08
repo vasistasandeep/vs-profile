@@ -23,8 +23,8 @@ export function StatusPill({ className, ...rest }: StatusPillProps) {
   return (
     <span
       className={cx(
-        "inline-flex items-center gap-2 rounded-full border border-emerald-400/30",
-        "bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300",
+        "inline-flex items-center gap-2 rounded-full border border-accent/30",
+        "bg-accent/10 px-3 py-1 text-xs font-medium text-accent",
         className,
       )}
       {...rest}
@@ -33,8 +33,8 @@ export function StatusPill({ className, ...rest }: StatusPillProps) {
         aria-hidden="true"
         className="relative flex h-2 w-2"
       >
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/70" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
       </span>
       {STATUS_PILL_TEXT}
     </span>

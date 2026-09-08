@@ -8,12 +8,13 @@ import { site } from "@/data/site";
 import { scrollToSection } from "@/lib/scroll";
 import { toggleMenu } from "@/components/ui/state";
 import { ResumeButton } from "@/components/ui/ResumeButton";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 /**
  * Navbar (`components/Navbar.tsx`) — Req 1, 9, 13.
  *
- * Sticky (`fixed top-0`), full-width, glassmorphism bar with a `border-white/10`
- * bottom edge. Structure:
+ * Sticky (`fixed top-0`), full-width, token-based translucent header with a
+ * `border-border` bottom edge. Structure:
  *
  * - Left: monogram "Vasista Sandeep" (from `site.monogram`) + `StatusPill`
  *   (Req 1.2, 1.3).
@@ -96,7 +97,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
       <nav
         aria-label="Primary"
         className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
@@ -106,7 +107,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => handleNavigate(navLinks[0].targetId)}
-            className="truncate text-base font-semibold tracking-tight text-white transition-colors hover:text-emerald-300"
+            className="truncate text-base font-semibold tracking-tight text-fg transition-colors hover:text-accent"
           >
             {site.monogram}
           </button>
@@ -125,8 +126,8 @@ export function Navbar() {
                   className={[
                     "rounded-full px-3 py-2 text-sm font-medium transition-colors",
                     isActive
-                      ? "text-emerald-300"
-                      : "text-slate-300 hover:text-white",
+                      ? "text-accent"
+                      : "text-muted hover:text-fg",
                   ].join(" ")}
                 >
                   {link.label}
@@ -136,15 +137,16 @@ export function Navbar() {
           })}
         </ul>
 
-        {/* Right: resume + LinkedIn (md+) and mobile toggle (≤768px) */}
+        {/* Right: theme toggle + resume + LinkedIn (md+) and mobile toggle (≤768px) */}
         <div className="flex items-center gap-2 sm:gap-3">
           <ResumeButton className="hidden md:inline-flex" />
+          <ThemeToggle />
           <a
             href={site.linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile (opens in a new tab)"
-            className="hidden h-9 w-9 items-center justify-center rounded-full border border-white/10 text-slate-300 transition-colors hover:border-emerald-400/40 hover:text-emerald-300 md:inline-flex"
+            className="hidden h-9 w-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent/40 hover:text-accent md:inline-flex"
           >
             <Linkedin className="h-4 w-4" aria-hidden="true" />
           </a>
@@ -156,7 +158,7 @@ export function Navbar() {
             aria-expanded={mobileOpen}
             aria-controls={MOBILE_MENU_ID}
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-slate-300 transition-colors hover:border-emerald-400/40 hover:text-emerald-300 md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent/40 hover:text-accent md:hidden"
           >
             {mobileOpen ? (
               <X className="h-5 w-5" aria-hidden="true" />
@@ -171,7 +173,7 @@ export function Navbar() {
       <div
         id={MOBILE_MENU_ID}
         hidden={!mobileOpen}
-        className="border-t border-white/10 bg-slate-950/90 backdrop-blur-md md:hidden"
+        className="border-t border-border bg-background/95 backdrop-blur md:hidden"
       >
         <ul className="flex flex-col gap-1 px-4 py-4">
           {navLinks.map((link) => {
@@ -185,8 +187,8 @@ export function Navbar() {
                   className={[
                     "w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-white/5 text-emerald-300"
-                      : "text-slate-300 hover:bg-white/5 hover:text-white",
+                      ? "bg-surface2 text-accent"
+                      : "text-muted hover:bg-surface2 hover:text-fg",
                   ].join(" ")}
                 >
                   {link.label}
@@ -196,12 +198,13 @@ export function Navbar() {
           })}
           <li className="mt-3 flex items-center gap-3">
             <ResumeButton />
+            <ThemeToggle />
             <a
               href={site.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn profile (opens in a new tab)"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-slate-300 transition-colors hover:border-emerald-400/40 hover:text-emerald-300"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent/40 hover:text-accent"
             >
               <Linkedin className="h-4 w-4" aria-hidden="true" />
             </a>

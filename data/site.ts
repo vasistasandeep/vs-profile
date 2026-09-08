@@ -1,9 +1,8 @@
-// data/site.ts
+﻿// data/site.ts
 //
 // Site-wide metadata: identity, contact channels, resume path, footer
 // attribution, OpenGraph preview block, and JSON-LD Person/ProfilePage
-// structured data. All values are pre-populated for zero-config deploy
-// (Req 1.4, 11.1, 12.1, 13.2, 15.1, 15.2, 20.1).
+// structured data. Content is aligned to the resume as the source of truth.
 
 import type { SiteMeta } from "@/types/content";
 
@@ -21,39 +20,36 @@ export const site: SiteMeta = {
   // form POSTs submissions here. A Formspree form URL is public and contains
   // no secret, so it is safe to commit.
   formspreeEndpoint: "https://formspree.io/f/mrpgyepg",
-  // Placeholder PDF committed at public/Vasista_Sandeep_Resume.pdf so the
-  // ResumeButton HEAD availability check succeeds; replace with the real resume.
   resumePath: "/Vasista_Sandeep_Resume.pdf",
   // Professional headshot used as the Hero avatar and the JSON-LD Person.image.
-  // Save a square (>= 400x400), professionally cropped photo at this path.
   portrait: {
     src: "/vasista-headshot.jpg",
-    alt: "Vasista Sandeep Srinivasa, Platform Product Leader",
+    alt: "Vasista Sandeep, AVP Program Management (Tech & Product)",
   },
   footerText:
-    "© 2026 Vasista Sandeep Srinivasa • vasistasandeep.in • Built with Next.js, Tailwind & OpenTelemetry Mental Models.",
+    "© 2026 Vasista Sandeep • vasistasandeep.in • Program & Product leadership for high-scale consumer platforms.",
   og: {
-    title: "Vasista Sandeep | Platform & Technical Product Leadership",
+    title: "Vasista Sandeep | Program & Product Leadership",
     description:
-      "14+ years architecting distributed platforms, OTT media supply chains, and enterprise transformations across 30M+ peak concurrent users.",
-    // Placeholder PNG committed at public/og-image.png. Replace with the real
-    // OpenGraph preview asset sized 1200×630 before deploy.
+      "Executive technology leader and Six Sigma Black Belt with 14+ years scaling consumer platforms across OTT, FinTech, and Retail — from SonyLIV (30M+ users) to Walmart and Intel.",
     imagePath: "/og-image.png",
     siteName: "Vasista Sandeep",
     type: "website",
   },
   jsonLd: {
-    personName: "Vasista Sandeep Srinivasa",
+    personName: "Vasista Sandeep",
     url: siteUrl,
-    jobTitle: "Platform & Technical Product Leader",
+    jobTitle: "AVP, Program Management (Tech & Product)",
     sameAs: [linkedInUrl],
     knowsAbout: [
-      "Distributed Systems",
-      "OTT Streaming Architecture",
-      "OpenTelemetry",
-      "Server-Side Ad Insertion (SSAI)",
-      "Graceful Degradation & Fallback Operations (GDFO)",
-      "High-Concurrency Platforms",
+      "Program Management",
+      "Product Strategy",
+      "Portfolio & Budget Governance",
+      "OTT / Streaming Platforms",
+      "FinTech & Retail Commerce",
+      "High-Availability Distributed Systems",
+      "GenAI Integration",
+      "Lean Six Sigma (Black Belt)",
     ],
   },
 };

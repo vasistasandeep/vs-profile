@@ -52,10 +52,10 @@ export function CaseStudyDrawer() {
       <style>{drawerKeyframes}</style>
 
       <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
+        <p className="text-sm font-medium uppercase tracking-widest text-accent">
           Deep Dives
         </p>
-        <h3 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
+        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           In-Depth Case Studies
         </h3>
       </header>
@@ -78,7 +78,7 @@ export function CaseStudyDrawer() {
                 <Dialog.Trigger asChild>
                   <button
                     type="button"
-                    className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-2xl"
+                    className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
                     aria-label={`Read the in-depth case study: ${study.title}`}
                   >
                     <GlassCard
@@ -86,13 +86,13 @@ export function CaseStudyDrawer() {
                       className="flex h-full flex-col p-6"
                     >
                       <article className="flex h-full flex-col">
-                        <h4 className="text-lg font-semibold text-white">
+                        <h4 className="text-lg font-semibold text-fg">
                           {study.title}
                         </h4>
-                        <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
                           {study.summary}
                         </p>
-                        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-emerald-400 transition-colors group-hover:text-emerald-300">
+                        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity group-hover:opacity-80">
                           Read case study
                           <span aria-hidden="true">&rarr;</span>
                         </span>
@@ -104,7 +104,7 @@ export function CaseStudyDrawer() {
                 <Dialog.Portal>
                   {/* Pointer-blocking overlay makes background inert (Req 8.7). */}
                   <Dialog.Overlay
-                    className="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm data-[state=open]:animate-cs-overlay-in data-[state=closed]:animate-cs-overlay-out"
+                    className="fixed inset-0 z-40 bg-slate-950/50 data-[state=open]:animate-cs-overlay-in data-[state=closed]:animate-cs-overlay-out"
                     style={overlayAnimationVars}
                   />
 
@@ -113,13 +113,13 @@ export function CaseStudyDrawer() {
                   <Dialog.Content
                     aria-labelledby={titleId}
                     aria-describedby={descId}
-                    className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col border-l border-white/10 bg-slate-950/95 shadow-2xl backdrop-blur-xl focus:outline-none data-[state=open]:animate-cs-drawer-in data-[state=closed]:animate-cs-drawer-out sm:max-w-lg"
+                    className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col border-l border-border bg-surface shadow-2xl focus:outline-none data-[state=open]:animate-cs-drawer-in data-[state=closed]:animate-cs-drawer-out sm:max-w-lg"
                     style={drawerAnimationVars}
                   >
-                    <div className="flex items-start justify-between gap-4 border-b border-white/10 p-6">
+                    <div className="flex items-start justify-between gap-4 border-b border-border p-6">
                       <Dialog.Title
                         id={titleId}
-                        className="text-xl font-semibold text-white"
+                        className="text-xl font-semibold text-fg"
                       >
                         {study.title}
                       </Dialog.Title>
@@ -129,7 +129,7 @@ export function CaseStudyDrawer() {
                         <button
                           type="button"
                           aria-label="Close case study"
-                          className="flex-shrink-0 rounded-full border border-white/10 p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                          className="flex-shrink-0 rounded-full border border-border p-2 text-muted transition-colors hover:bg-surface2 hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         >
                           <X className="h-5 w-5" aria-hidden="true" />
                         </button>
@@ -139,7 +139,7 @@ export function CaseStudyDrawer() {
                     <div className="flex-1 space-y-4 overflow-y-auto p-6">
                       <Dialog.Description
                         id={descId}
-                        className="text-sm leading-relaxed text-slate-300"
+                        className="text-sm leading-relaxed text-muted"
                       >
                         {study.summary}
                       </Dialog.Description>
@@ -147,7 +147,7 @@ export function CaseStudyDrawer() {
                       {study.body.map((paragraph, index) => (
                         <p
                           key={index}
-                          className="text-sm leading-relaxed text-slate-400"
+                          className="text-sm leading-relaxed text-muted"
                         >
                           {paragraph}
                         </p>

@@ -61,10 +61,10 @@ export function ArchitectureFlowDiagram() {
       viewport={{ once: true }}
     >
       <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
+        <p className="text-sm font-medium uppercase tracking-widest text-accent">
           Architecture Flow
         </p>
-        <h3 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
+        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           System Flow: Client to Persistence
         </h3>
       </header>
@@ -81,9 +81,9 @@ export function ArchitectureFlowDiagram() {
                 aria-pressed={isActive}
                 interactive
                 glow={isActive ? "emerald" : "none"}
-                className={`cursor-pointer p-6 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-emerald-400/60 ${
+                className={`cursor-pointer p-6 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent/60 ${
                   isActive
-                    ? "border-emerald-400/60 bg-emerald-400/[0.06]"
+                    ? "border-accent/60 bg-accent/[0.06]"
                     : ""
                 }`}
                 onFocus={() => setActiveLayer(layer.id)}
@@ -94,7 +94,7 @@ export function ArchitectureFlowDiagram() {
               >
                 <h4
                   className={`text-lg font-semibold transition-colors ${
-                    isActive ? "text-emerald-300" : "text-white"
+                    isActive ? "text-accent" : "text-fg"
                   }`}
                 >
                   {layer.label}
@@ -103,7 +103,7 @@ export function ArchitectureFlowDiagram() {
                   {layer.elements.map((element) => (
                     <li
                       key={element}
-                      className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-slate-300"
+                      className="rounded-full border border-border bg-surface2 px-3 py-1 text-sm text-muted"
                     >
                       {element}
                     </li>

@@ -33,10 +33,10 @@ export function Credentials() {
   return (
     <div className="mt-16 scroll-mt-24">
       <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
+        <p className="text-sm font-medium uppercase tracking-widest text-accent">
           Credentials &amp; Governance
         </p>
-        <h2 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
+        <h2 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           Certifications
         </h2>
       </header>
@@ -51,7 +51,7 @@ export function Credentials() {
         {credentials.map((credential) => (
           <motion.li key={credential.id} variants={itemVariants}>
             <GlassCard className="flex h-full items-center px-5 py-4">
-              <span className="text-sm font-medium text-slate-200">
+              <span className="text-sm font-medium text-fg">
                 {credential.name}
               </span>
             </GlassCard>

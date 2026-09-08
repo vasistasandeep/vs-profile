@@ -51,10 +51,10 @@ export function PlatformEvolution() {
   return (
     <div>
       <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
+        <p className="text-sm font-medium uppercase tracking-widest text-accent">
           Platform Modernization
         </p>
-        <h3 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
+        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           Platform Evolution
         </h3>
       </header>
@@ -76,7 +76,7 @@ export function PlatformEvolution() {
                 <div className="flex items-start justify-between gap-4">
                   <h4
                     id={labelId}
-                    className="text-lg font-semibold text-white"
+                    className="text-lg font-semibold text-fg"
                   >
                     {item.title}
                   </h4>
@@ -87,7 +87,7 @@ export function PlatformEvolution() {
                   <div
                     role="group"
                     aria-labelledby={labelId}
-                    className="inline-flex flex-shrink-0 overflow-hidden rounded-full border border-white/10"
+                    className="inline-flex flex-shrink-0 overflow-hidden rounded-full border border-border"
                   >
                     <button
                       type="button"
@@ -96,10 +96,10 @@ export function PlatformEvolution() {
                       }}
                       aria-pressed={!isAfter}
                       aria-label={`Show the before state of ${item.title}`}
-                      className={`px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                      className={`px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                         !isAfter
-                          ? "bg-white/10 text-white"
-                          : "text-slate-400 hover:text-white"
+                          ? "bg-surface2 text-fg"
+                          : "text-muted hover:text-fg"
                       }`}
                     >
                       Before
@@ -111,10 +111,10 @@ export function PlatformEvolution() {
                       }}
                       aria-pressed={isAfter}
                       aria-label={`Show the after state of ${item.title}`}
-                      className={`px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                      className={`px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                         isAfter
-                          ? "bg-emerald-400/20 text-emerald-200"
-                          : "text-slate-400 hover:text-white"
+                          ? "bg-accent/15 text-accent"
+                          : "text-muted hover:text-fg"
                       }`}
                     >
                       After
@@ -132,7 +132,7 @@ export function PlatformEvolution() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={transition}
-                      className="text-sm leading-relaxed text-slate-400"
+                      className="text-sm leading-relaxed text-muted"
                     >
                       {detail}
                     </motion.p>

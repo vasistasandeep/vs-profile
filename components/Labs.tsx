@@ -43,10 +43,10 @@ export function Labs() {
               interactive
               className="flex h-full flex-col gap-2 px-5 py-5"
             >
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-base font-semibold text-fg">
                 {lab.title}
               </h3>
-              <p className="text-sm leading-relaxed text-slate-300">
+              <p className="text-sm leading-relaxed text-muted">
                 {lab.descriptor}
               </p>
             </GlassCard>

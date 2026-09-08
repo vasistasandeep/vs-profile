@@ -8,8 +8,8 @@ import { site } from "@/data/site";
  * Renders a `<footer>` containing the exact copyright/attribution string from
  * `site.footerText`. This is a plain, presentational component (no
  * `"use client"`): it has no hooks or interactivity, so it works in server or
- * client trees alike. Styled subtly with slate-400 text, a hairline top border
- * (`border-white/10`), and centered content.
+ * client trees alike. Styled subtly with muted token text, a hairline top
+ * border (`border-border`), and centered content.
  */
 
 export type FooterProps = HTMLAttributes<HTMLElement>;
@@ -23,8 +23,8 @@ export function Footer({ className, ...rest }: FooterProps) {
   return (
     <footer
       className={cx(
-        "border-t border-white/10",
-        "px-6 py-8 text-center text-sm text-slate-400",
+        "border-t border-border",
+        "px-6 py-8 text-center text-sm text-muted",
         className,
       )}
       {...rest}

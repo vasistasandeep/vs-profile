@@ -101,9 +101,9 @@ describe("Navbar interactions", () => {
     });
     expect(openToggle).toHaveAttribute("aria-expanded", "true");
     expect(panel.hidden).toBe(false);
-    // The link panel now shows the nav links (e.g. "Governance").
+    // The link panel now shows the nav links (e.g. "Experience").
     expect(
-      within(panel).getByRole("button", { name: "Governance" }),
+      within(panel).getByRole("button", { name: "Experience" }),
     ).toBeInTheDocument();
 
     // Close again: aria-expanded flips back to false and panel hides.

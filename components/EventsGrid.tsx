@@ -40,7 +40,7 @@ export function EventsGrid() {
               interactive
               className="flex h-full flex-col p-6"
             >
-              <h3 className="text-xl font-semibold text-white">
+              <h3 className="text-xl font-semibold text-fg">
                 {category.title}
               </h3>
 
@@ -48,18 +48,18 @@ export function EventsGrid() {
                 {category.events.map((event) => (
                   <li
                     key={event}
-                    className="flex gap-2 text-sm leading-relaxed text-slate-400"
+                    className="flex gap-2 text-sm leading-relaxed text-muted"
                   >
                     <span
                       aria-hidden="true"
-                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400"
+                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"
                     />
                     <span>{event}</span>
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-6 border-t border-white/10 pt-4 text-sm font-medium text-cyan-300">
+              <p className="mt-6 border-t border-border pt-4 text-sm font-medium text-accent2">
                 {category.note}
               </p>
             </GlassCard>

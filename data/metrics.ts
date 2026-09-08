@@ -9,7 +9,7 @@ import type { Metric } from "@/types/content";
 export const metrics: Metric[] = [
   {
     id: "years-technical-leadership",
-    label: "Years Technical Leadership",
+    label: "Years Technology Leadership",
     target: 14,
     suffix: "+",
     decimals: 0,
@@ -17,7 +17,7 @@ export const metrics: Metric[] = [
   },
   {
     id: "peak-concurrent-viewers",
-    label: "Peak Concurrent Viewers",
+    label: "Peak Concurrent Users",
     target: 30,
     suffix: "M+",
     decimals: 0,
@@ -25,7 +25,7 @@ export const metrics: Metric[] = [
   },
   {
     id: "requests-per-second",
-    label: "Requests Per Second",
+    label: "Peak Requests / Sec (live events)",
     target: 250,
     suffix: "K",
     decimals: 0,
@@ -41,7 +41,7 @@ export const metrics: Metric[] = [
   },
   {
     id: "publishing-latency-reduction",
-    label: "Reduction in Publishing Latency",
+    label: "Publishing Latency Reduction",
     target: 40,
     suffix: "%",
     decimals: 0,

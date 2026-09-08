@@ -95,13 +95,13 @@ export function CostCalculator() {
       viewport={{ once: true }}
     >
       <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
+        <p className="text-sm font-medium uppercase tracking-widest text-accent">
           Cost Modeling
         </p>
-        <h3 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
+        <h3 className="mt-2 text-3xl font-semibold text-fg sm:text-4xl">
           Telemetry &amp; Sampling Cost Calculator
         </h3>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
           A worked example of the cost lever behind full-stack observability.
           Drag the slider to set peak viewer concurrency, switch the sampling
           strategy, and watch the estimated monthly telemetry bill respond in
@@ -120,11 +120,11 @@ export function CostCalculator() {
                 <label
                   id="concurrency-label"
                   htmlFor="concurrency-slider"
-                  className="text-sm font-medium text-slate-200"
+                  className="text-sm font-medium text-fg"
                 >
                   Peak Concurrency
                 </label>
-                <span className="font-mono text-lg font-semibold tabular-nums text-emerald-300">
+                <span className="font-mono text-lg font-semibold tabular-nums text-accent">
                   {numberFmt.format(result.concurrency)}
                 </span>
               </div>
@@ -139,17 +139,17 @@ export function CostCalculator() {
                 onValueChange={(values) => setConcurrency(values[0])}
                 aria-labelledby="concurrency-label"
               >
-                <Slider.Track className="relative h-1.5 w-full grow rounded-full bg-white/10">
-                  <Slider.Range className="absolute h-full rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400" />
+                <Slider.Track className="relative h-1.5 w-full grow rounded-full bg-surface2">
+                  <Slider.Range className="absolute h-full rounded-full bg-gradient-to-r from-accent to-accent2" />
                 </Slider.Track>
                 <Slider.Thumb
-                  className="block h-5 w-5 rounded-full border border-emerald-300 bg-slate-950 shadow-glow-emerald outline-none transition-colors focus-visible:ring-2 focus-visible:ring-emerald-400/70"
+                  className="block h-5 w-5 rounded-full border border-accent bg-surface shadow-card outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent/70"
                   aria-label="Peak concurrency in users"
                   aria-valuetext={describeUsers(concurrency)}
                 />
               </Slider.Root>
 
-              <div className="mt-2 flex justify-between text-xs tabular-nums text-slate-500">
+              <div className="mt-2 flex justify-between text-xs tabular-nums text-muted">
                 <span>{numberFmt.format(MIN_CONCURRENCY)}</span>
                 <span>{numberFmt.format(MAX_CONCURRENCY)}</span>
               </div>
@@ -159,7 +159,7 @@ export function CostCalculator() {
             <div>
               <p
                 id="sampling-label"
-                className="text-sm font-medium text-slate-200"
+                className="text-sm font-medium text-fg"
               >
                 Sampling Strategy
               </p>
@@ -177,13 +177,13 @@ export function CostCalculator() {
               >
                 <ToggleGroup.Item
                   value="standard"
-                  className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-left text-sm text-slate-300 outline-none transition-colors hover:border-white/20 focus-visible:ring-2 focus-visible:ring-emerald-400/60 data-[state=on]:border-emerald-400 data-[state=on]:bg-emerald-400/10 data-[state=on]:text-emerald-200"
+                  className="rounded-xl border border-border bg-surface2 px-4 py-3 text-left text-sm text-muted outline-none transition-colors hover:border-accent/40 focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=on]:border-accent data-[state=on]:bg-accent/10 data-[state=on]:text-accent"
                 >
                   Standard 100% Ingestion
                 </ToggleGroup.Item>
                 <ToggleGroup.Item
                   value="tail"
-                  className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-left text-sm text-slate-300 outline-none transition-colors hover:border-white/20 focus-visible:ring-2 focus-visible:ring-emerald-400/60 data-[state=on]:border-emerald-400 data-[state=on]:bg-emerald-400/10 data-[state=on]:text-emerald-200"
+                  className="rounded-xl border border-border bg-surface2 px-4 py-3 text-left text-sm text-muted outline-none transition-colors hover:border-accent/40 focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=on]:border-accent data-[state=on]:bg-accent/10 data-[state=on]:text-accent"
                 >
                   Tail-Based Intelligent Sampling (100% errors / 1% healthy)
                 </ToggleGroup.Item>
@@ -193,52 +193,52 @@ export function CostCalculator() {
 
           {/* --- Outputs (all derived from `result`, Req 6.3/6.4/6.7) --- */}
           <div className="flex flex-col gap-4" aria-live="polite">
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
+            <div className="rounded-xl border border-border bg-surface2 p-4">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted">
                 Telemetry Ingested
               </p>
-              <p className="mt-1 font-mono text-2xl font-semibold tabular-nums text-white">
+              <p className="mt-1 font-mono text-2xl font-semibold tabular-nums text-fg">
                 {numberFmt.format(result.spansPerSecond)}
-                <span className="ml-1 text-sm font-normal text-slate-400">
+                <span className="ml-1 text-sm font-normal text-muted">
                   spans / sec
                 </span>
               </p>
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-xs text-muted">
                 Volume of trace data your APM vendor bills for.
               </p>
             </div>
 
-            <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/[0.04] p-4">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-300">
+            <div className="rounded-xl border border-accent/25 bg-accent/[0.06] p-4">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted">
                 Estimated Monthly Telemetry Cost
               </p>
               <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="font-mono text-2xl font-semibold tabular-nums text-white">
+                <span className="font-mono text-2xl font-semibold tabular-nums text-fg">
                   {usdFmt.format(result.monthlyCostUsd)}
                 </span>
                 {result.savingsUsd > 0 && (
-                  <span className="font-mono text-sm font-medium tabular-nums text-emerald-300">
+                  <span className="font-mono text-sm font-medium tabular-nums text-accent">
                     &darr; {usdFmt.format(result.savingsUsd)} ({result.savingsPercent}%) vs. standard
                   </span>
                 )}
               </div>
-              <p className="mt-1 text-xs tabular-nums text-slate-500">
+              <p className="mt-1 text-xs tabular-nums text-muted">
                 Baseline at 100% ingestion: {usdFmt.format(result.baselineCostUsd)} / month
               </p>
             </div>
 
             {/* Plain-English takeaway — recomputed live so the point lands
                 without the reader having to interpret the raw numbers. */}
-            <p className="text-sm leading-relaxed text-slate-300">
+            <p className="text-sm leading-relaxed text-muted">
               {result.savingsUsd > 0 ? (
                 <>
                   At {millions(result.concurrency)} peak viewers, tail-based
                   sampling trims the telemetry bill by roughly{" "}
-                  <span className="font-semibold text-emerald-300">
+                  <span className="font-semibold text-accent">
                     {usdFmt.format(result.savingsUsd)}/month
                   </span>{" "}
                   &mdash; while still preserving{" "}
-                  <span className="font-semibold text-emerald-300">
+                  <span className="font-semibold text-accent">
                     {result.mttrFidelityPercent}% MTTR fidelity
                   </span>{" "}
                   (every error trace is kept, so incident debugging is unaffected).
@@ -248,7 +248,7 @@ export function CostCalculator() {
                   Standard 100% ingestion captures everything but is the most
                   expensive option. Switch to tail-based sampling to see the
                   savings while keeping{" "}
-                  <span className="font-semibold text-emerald-300">
+                  <span className="font-semibold text-accent">
                     {result.mttrFidelityPercent}% MTTR fidelity
                   </span>
                   .
@@ -260,19 +260,19 @@ export function CostCalculator() {
 
         {/* "How this works" note — states the model assumptions in plain
             English so the figures are transparent, not a black box. */}
-        <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-4">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+        <div className="mt-6 rounded-xl border border-border bg-surface2 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wider text-fg">
             How this estimate works
           </p>
-          <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-slate-400">
+          <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-muted">
             {ASSUMPTIONS.map((line) => (
               <li key={line} className="flex gap-2">
-                <span aria-hidden="true" className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-emerald-400/70" />
+                <span aria-hidden="true" className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent/70" />
                 <span>{line}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs italic leading-relaxed text-slate-500">
+          <p className="mt-3 text-xs italic leading-relaxed text-muted">
             Figures are illustrative order-of-magnitude estimates to demonstrate
             the observability cost/latency trade-off &mdash; not a vendor quote.
           </p>
