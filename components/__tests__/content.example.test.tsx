@@ -259,11 +259,11 @@ describe("Credentials — seven certification names (Req 9.1)", () => {
   });
 });
 
-describe("Testimonials — exact executive titles (Req 10.1)", () => {
-  it("renders the section heading and all three attribution titles", () => {
+describe("Testimonials — role-only attribution titles (Req 10.1)", () => {
+  it("renders the section heading and all three role-only attribution titles", () => {
     render(<Testimonials />);
     expect(
-      screen.getByText("Leadership Endorsements & Peer Validation"),
+      screen.getByText("What people I've worked with say"),
     ).toBeInTheDocument();
     for (const testimonial of testimonials) {
       expect(screen.getByText(testimonial.title)).toBeInTheDocument();
@@ -292,7 +292,7 @@ describe("Hero — exact eyebrow, headline, and sub-headline (Req 2.1-2.4)", () 
   it("renders the exact eyebrow badge text", () => {
     expect(
       screen.getByText(
-        "Platform Architecture • High-Concurrency Distributed Systems • Observability",
+        "Program & Product Leadership \u00b7 OTT \u00b7 FinTech \u00b7 Retail",
       ),
     ).toBeInTheDocument();
   });
@@ -300,7 +300,7 @@ describe("Hero — exact eyebrow, headline, and sub-headline (Req 2.1-2.4)", () 
   it("renders the exact headline", () => {
     expect(
       screen.getByRole("heading", {
-        name: "Engineering Resilience & Scale for Global Streaming Platforms.",
+        name: "Building platforms that scale to 30M+ users.",
       }),
     ).toBeInTheDocument();
   });
@@ -308,17 +308,17 @@ describe("Hero — exact eyebrow, headline, and sub-headline (Req 2.1-2.4)", () 
   it("renders the exact sub-headline", () => {
     expect(
       screen.getByText(
-        "14+ years architecting distributed platforms, OTT media supply chains, and enterprise data transformations across 30M+ peak concurrent users.",
+        "I turn ambitious roadmaps into resilient, high-concurrency products, aligning engineering, product, and delivery so the platform stays fast when the audience shows up all at once.",
       ),
     ).toBeInTheDocument();
   });
 
   it("renders the two CTAs and every metric label", () => {
     expect(
-      screen.getByRole("button", { name: "Explore Architecture" }),
+      screen.getByRole("button", { name: "Explore my work" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Schedule Advisory Chat" }),
+      screen.getByRole("button", { name: "Get in touch" }),
     ).toBeInTheDocument();
     for (const metric of metrics) {
       // Each label appears twice: an sr-only <dt> and the visible <span>.

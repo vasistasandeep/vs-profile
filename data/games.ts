@@ -8,7 +8,9 @@ import type {
   TriviaQuestion,
   IncidentStep,
   Feature,
+  WorkItem,
 } from "@/lib/games";
+import { DEFAULT_ERROR_BUDGET } from "@/lib/games";
 
 // --- Trivia Blitz ----------------------------------------------------------
 
@@ -245,4 +247,46 @@ export const priorityFeatures: Feature[] = [
     confidence: 0.6,
     effort: 6,
   },
+];
+
+// --- Error Budget Balancer -------------------------------------------------
+
+export interface ErrorBudgetConfig {
+  /** Labels for each allocation period (one slider each). */
+  periods: string[];
+  /** Total quarterly error budget (normalized units). */
+  budget: number;
+  /** One-line framing shown above the sliders. */
+  intro: string;
+  /** Coaching shown when the plan stays within budget. */
+  withinBudgetCoaching: string;
+  /** Coaching shown when the plan blows the budget. */
+  overBudgetCoaching: string;
+}
+
+export const errorBudgetConfig: ErrorBudgetConfig = {
+  periods: ["Month 1", "Month 2", "Month 3"],
+  budget: DEFAULT_ERROR_BUDGET,
+  intro:
+    "You hold one quarter of error budget from a 99.9% SLO. For each month, choose how aggressively to ship. Shipping fast burns budget but earns velocity; staying conservative preserves reliability.",
+  withinBudgetCoaching:
+    "Within budget. You converted reliability headroom into shipping velocity without breaching the SLO, exactly how a healthy error budget should be spent.",
+  overBudgetCoaching:
+    "Budget blown. You shipped past the SLO and would be forced into a change freeze to recover. Reliability work now blocks the roadmap.",
+};
+
+// --- Sprint Capacity Planner ----------------------------------------------
+
+/** Fixed sprint capacity in story points. */
+export const sprintCapacity = 20;
+
+export const sprintBacklog: WorkItem[] = [
+  { id: "checkout-fix", name: "Checkout latency fix", points: 5, value: 9 },
+  { id: "sso", name: "Enterprise SSO", points: 8, value: 10 },
+  { id: "search", name: "Search relevance rework", points: 6, value: 7 },
+  { id: "onboarding", name: "Guided onboarding", points: 3, value: 5 },
+  { id: "a11y", name: "Accessibility audit fixes", points: 4, value: 6 },
+  { id: "dashboards", name: "Analytics dashboards", points: 7, value: 6 },
+  { id: "notifications", name: "Push notifications", points: 2, value: 3 },
+  { id: "refactor", name: "Payments refactor", points: 5, value: 4 },
 ];

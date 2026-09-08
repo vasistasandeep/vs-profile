@@ -45,10 +45,10 @@ const config: Config = {
         // and visible on light, subtle on dark). The former neon `glow*`
         // tokens are aliased to `card` so any remaining references degrade to
         // the same tasteful elevation instead of a haze.
-        card: "var(--shadow-card)",
-        glow: "var(--shadow-card)",
-        "glow-emerald": "var(--shadow-card)",
-        "glow-cyan": "var(--shadow-card)",
+        card: "none",
+        glow: "none",
+        "glow-emerald": "none",
+        "glow-cyan": "none",
       },
       fontFamily: {
         // Inter is wired via next/font in app/layout.tsx. The CSS variable is

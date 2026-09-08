@@ -1,41 +1,36 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useState } from "react";
+import { Download } from "lucide-react";
 import { site } from "@/data/site";
 
 /**
- * ResumeButton — resume download action with graceful fallback (Req 13).
+ * ProfileButton — "Download Profile" action with a graceful fallback.
  *
- * Renders a "Download Resume (PDF)" button (Req 13.1). On activation it performs
- * a lightweight availability check — a `fetch(resumePath, { method: "HEAD" })`
- * — before opening the file:
+ * On activation it does a lightweight availability check (HEAD) on the profile
+ * PDF before opening it:
+ * - On success it downloads the PDF via a hidden <a download>.
+ * - On 404 / non-OK / network error it opens a small dialog offering to
+ *   request the profile by email.
  *
- * - On success (response OK), it opens/downloads `/Vasista_Sandeep_Resume.pdf`
- *   via a hidden `<a download>` click (Req 13.1, 13.2).
- * - On a 404, other non-OK status, or any network error, it opens a simple
- *   fallback modal offering to request the resume by email to
- *   `contact@vasistasandeep.in` (Req 13.3). Network errors are treated as
- *   "unavailable" rather than surfacing a raw error.
- *
- * The modal is a lightweight inline dialog driven by local state (a Radix
- * Dialog would also work); it uses `role="dialog"` + `aria-modal` and closes on
- * the Close button or backdrop click.
+ * (File/exports keep the ResumeButton name for import stability across the
+ * codebase and tests; the user-facing label is "Download Profile".)
  */
 
 export interface ResumeButtonProps {
   /** Extra classes appended to the trigger button. */
   className?: string;
-  /** Optional label override; defaults to the required Req 13.1 text. */
+  /** Optional label override. */
   label?: string;
 }
 
-/** Exact button label required by Req 13.1. */
-export const RESUME_BUTTON_LABEL = "Download Resume (PDF)";
+/** User-facing button label. */
+export const RESUME_BUTTON_LABEL = "Download Profile";
 
-/** Trigger a browser download/open of the resume file via a hidden anchor. */
-function openResume(resumePath: string): void {
+/** Trigger a browser download/open of the profile file via a hidden anchor. */
+function openProfile(path: string): void {
   const anchor = document.createElement("a");
-  anchor.href = resumePath;
+  anchor.href = path;
   anchor.download = "";
   anchor.rel = "noopener";
   document.body.appendChild(anchor);
@@ -55,13 +50,11 @@ export function ResumeButton({
     try {
       const res = await fetch(site.resumePath, { method: "HEAD" });
       if (res.ok) {
-        openResume(site.resumePath);
+        openProfile(site.resumePath);
       } else {
-        // 404 or any other non-OK status → graceful fallback (Req 13.3).
         setShowFallback(true);
       }
     } catch {
-      // Network error → treat as unavailable and offer the email fallback.
       setShowFallback(true);
     } finally {
       setChecking(false);
@@ -71,9 +64,9 @@ export function ResumeButton({
   const closeFallback = useCallback(() => setShowFallback(false), []);
 
   const mailtoHref = `mailto:${site.primaryEmail}?subject=${encodeURIComponent(
-    "Resume request",
+    "Profile request",
   )}&body=${encodeURIComponent(
-    "Hi Vasista, I'd like to request a copy of your resume.",
+    "Hi Vasista, I'd like a copy of your profile.",
   )}`;
 
   return (
@@ -84,7 +77,7 @@ export function ResumeButton({
         disabled={checking}
         aria-busy={checking}
         className={[
-          "inline-flex items-center justify-center rounded-full",
+          "inline-flex items-center justify-center gap-2 rounded-full",
           "bg-emerald-600 px-4 py-2 text-sm font-semibold text-white",
           "transition-colors hover:bg-emerald-500 disabled:opacity-70",
           className,
@@ -92,31 +85,32 @@ export function ResumeButton({
           .filter(Boolean)
           .join(" ")}
       >
+        <Download className="h-4 w-4" aria-hidden="true" />
         {label}
       </button>
 
       {showFallback && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
           onClick={closeFallback}
         >
           <div
             role="dialog"
             aria-modal="true"
-            aria-labelledby="resume-fallback-title"
-            aria-describedby="resume-fallback-desc"
-            className="w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-card"
+            aria-labelledby="profile-fallback-title"
+            aria-describedby="profile-fallback-desc"
+            className="w-full max-w-md rounded-2xl border border-border bg-surface p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <h2
-              id="resume-fallback-title"
+              id="profile-fallback-title"
               className="text-lg font-semibold text-fg"
             >
-              Resume temporarily unavailable
+              Profile temporarily unavailable
             </h2>
-            <p id="resume-fallback-desc" className="mt-2 text-sm text-muted">
-              The resume file could not be loaded right now. You can request a
-              copy by email and I&apos;ll send it over.
+            <p id="profile-fallback-desc" className="mt-2 text-sm text-muted">
+              The file could not be loaded right now. You can request a copy by
+              email and I&apos;ll send it over.
             </p>
             <div className="mt-5 flex flex-wrap justify-end gap-3">
               <button

@@ -8,7 +8,6 @@ import { site } from "@/data/site";
 import { scrollToSection } from "@/lib/scroll";
 import { toggleMenu } from "@/components/ui/state";
 import { ResumeButton } from "@/components/ui/ResumeButton";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 /**
  * Navbar (`components/Navbar.tsx`) — Req 1, 9, 13.
@@ -140,7 +139,6 @@ export function Navbar() {
         {/* Right: theme toggle + resume + LinkedIn (md+) and mobile toggle (≤768px) */}
         <div className="flex items-center gap-2 sm:gap-3">
           <ResumeButton className="hidden md:inline-flex" />
-          <ThemeToggle />
           <a
             href={site.linkedInUrl}
             target="_blank"
@@ -198,7 +196,6 @@ export function Navbar() {
           })}
           <li className="mt-3 flex items-center gap-3">
             <ResumeButton />
-            <ThemeToggle />
             <a
               href={site.linkedInUrl}
               target="_blank"

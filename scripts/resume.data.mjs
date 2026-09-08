@@ -1,38 +1,42 @@
 ﻿// scripts/resume.data.mjs
 //
-// Single source of truth for the resume content rendered into
-// public/Vasista_Sandeep_Resume.pdf by scripts/generate-resume.mjs.
-// Phrasing is intentionally verbatim to the approved copy — edit here, then
-// re-run `npm run generate:resume` to regenerate the PDF.
+// Single source of truth for the downloadable Profile PDF, rendered into
+// public/Vasista_Sandeep_Resume.pdf by scripts/generate-resume.mjs. Content is
+// aligned to the real resume. Edit here, then run `npm run generate:profile`.
 
 export const resume = {
-  name: "Vasista Sandeep Srinivasa",
-  title: "Platform Product Leader & Technical Program Manager",
+  name: "Vasista Sandeep S",
+  title: "AVP, Program Management (Tech & Product)",
   location: "Bengaluru, India",
-  email: "contact@vasistasandeep.in",
+  email: "vasista.sandeep@gmail.com",
+  phone: "+91 99869 88057",
   linkedIn: "linkedin.com/in/vasistasandeep",
   linkedInUrl: "https://www.linkedin.com/in/vasistasandeep/",
   website: "vasistasandeep.in",
   websiteUrl: "https://vasistasandeep.in",
 
   summary:
-    "Platform Product Leader and Technical Program Manager with 14+ years of experience engineering resilience and scale for global distributed systems. Specialized in OTT media supply chains, high-concurrency live streaming (30M+ users at 250K RPS), and full-stack observability. Proven track record of originating platform strategy, decoupling legacy monoliths, and establishing architectural governance (GDFO) to ensure 99.99% uptime during global sports events.",
+    "Executive technology leader and Six Sigma Black Belt with 14+ years scaling massive consumer platforms, engineering portfolios, and cross-functional organizations. Expert in bridging product strategy with engineering execution for high-volume streaming and commerce platforms (30M+ users). Proven track record of building 'Team of Teams' structures, managing multi-million-dollar roadmaps, and driving architectural transformations across OTT, Finance, and Retail. Passionate about leveraging GenAI and modern data stacks to drive business innovation.",
 
   competencies: [
     {
-      label: "Platform & Architecture",
+      label: "Group Leadership",
       items:
-        "Distributed Systems, Microservices, Server-Side Ad Insertion (SSAI), Multi-CDN Shielding, GDFO (Graceful Degradation).",
+        "Portfolio Management, Resource Planning, Budget Governance, Executive Reporting, Vendor Management, Cross-Functional Governance.",
     },
     {
-      label: "Observability & Telemetry",
+      label: "Domain Expertise",
       items:
-        "OpenTelemetry (OTel), Datadog, Prometheus, Grafana, Tail-Based Sampling, SLI/SLO Governance, MELT.",
+        "OTT / Streaming (SonyLIV), FinTech & Retail Commerce (Walmart), Personalization Engines, Identity Management (SSO), Data Privacy (GDPR).",
     },
     {
-      label: "Product Strategy",
+      label: "Technical Strategy",
       items:
-        "Build vs. Buy Trade-offs, Multi-Region Expansion (GDPR, US, Japan data residency), Cost vs. Latency Optimization.",
+        "Microservices Architecture, High-Availability Distributed Systems (99.99%), Cloud Architecture (AWS/Azure), GenAI Integrations, Load Testing Strategy.",
+    },
+    {
+      label: "Tools",
+      items: "Jira, BigPicture, Confluence, Python, SQL, Power BI, Tableau.",
     },
   ],
 
@@ -40,65 +44,131 @@ export const resume = {
     {
       company: "Sony Pictures Networks India",
       role: "AVP, Program Management (Tech & Product)",
-      dates: "",
+      dates: "Mar 2026 - Present",
       bullets: [
         {
-          lead: "Originated Platform Modernization:",
+          lead: "Organizational Leadership & Scale:",
           text:
-            "Authored the business and technical vision to replace legacy third-party vendors with a proprietary in-house CMS engine ('Bolt'), driving a 40% reduction in content publishing latency and saving multi-millions in OPEX.",
+            "Direct the executive engineering portfolio and a cross-functional 'Team of Teams' to sustain 99.99% system availability during extreme live-traffic events (250K RPS) on the global SonyLIV OTT platform (30M+ concurrent users).",
         },
         {
-          lead: "Governed High-Concurrency Live Scale (30M+ Users):",
+          lead: "Personalization Strategy:",
           text:
-            "Directed tournament engineering readiness for global events (UEFA, Australian Open, Bilateral Cricket). Sustained 250K RPS surges with 99.99% uptime by enforcing strict token-bucket edge rate limiting and Redis cluster pre-warming.",
+            "Spearhead the technical strategy and scaling of personalization engines, driving complex cross-team integrations to deliver highly tailored end-user experiences.",
         },
         {
-          lead: "Established GDFO via Architecture Control Committee:",
+          lead: "Cross-Functional Governance:",
           text:
-            "Formed the ACC governance framework to manage error budgets. Implemented automated circuit breakers (Envoy/Resilience4j) on non-critical endpoints to guarantee 100% core playback continuity during unpredictable traffic spikes.",
+            "Act as the central bridge between Product and Engineering leadership, ensuring technical delivery aligns with overarching business priorities.",
+        },
+      ],
+    },
+    {
+      company: "Sony Pictures Networks India",
+      role: "Lead Program Manager (Tech & Product)",
+      dates: "May 2021 - Mar 2026",
+      bullets: [
+        {
+          lead: "Strategic OPEX & Build vs. Buy:",
+          text:
+            "Managed the multi-million-dollar budget and delivery for 'Bolt' (proprietary CMS), replacing legacy vendors to achieve a 40% reduction in publishing latency and major operational savings.",
         },
         {
-          lead: "Proactive Systemic Risk Discovery:",
+          lead: "Data Governance & Scale:",
           text:
-            "Conducted independent telemetry audits ahead of major live events to map unknown vulnerabilities, discovering a 3-minute auto-scaling provisioning lag. Designed Edge-to-Persistence failover policies that completely mitigated this lag, protecting live ad monetization.",
+            "Led cross-functional squads (Legal, InfoSec, Engineering) to define technical roadmaps for US/Europe expansion, implementing robust GDPR/PII compliance frameworks.",
         },
         {
-          lead: "Multi-Region Compliance Expansion:",
+          lead: "Innovation Strategy:",
           text:
-            "Architected regional data isolation boundaries at the Gateway layer, enabling the platform's multi-territory rollout across North America, Europe (GDPR), and Japan while strictly isolating PII and subscription state.",
+            "Steered the 'Mobile Web Revamp' and 'Shorts' video initiatives, driving decisions that optimized rendering performance and increased ad-inventory monetization.",
+        },
+        {
+          lead: "Architectural Modernization:",
+          text:
+            "Drove the modularization of a legacy monolithic backend, decoupling and scaling dedicated microservices for Playback, Listing, and User Subscription Management.",
         },
       ],
     },
     {
       company: "Walmart Global Tech",
-      role: "",
-      dates: "",
+      role: "Technical Program Manager",
+      dates: "Dec 2019 - May 2021",
       bullets: [
         {
-          lead: "FinTech Data Pipeline Re-engineering:",
+          lead: "FinTech Architecture & Operational Excellence:",
           text:
-            "Led the product roadmap for automated financial audit platforms, transitioning manual post-payment audit processes into real-time streaming ML anomaly detection pipelines.",
+            "Led the engineering roadmap for the 'Post Payment Audit' system, partnering with Staff Engineers to redesign data pipelines for automated anomaly detection while championing DevOps/CI-CD practices - recovering multi-millions annually.",
         },
         {
-          lead: "Revenue Recovery:",
+          lead: "Retail Commerce & Platform Optimization:",
           text:
-            "Utilized Kafka event streams and Elasticsearch/Splunk log aggregation to isolate transaction anomalies, recovering millions of dollars in leaked revenue annually.",
+            "Governed cross-functional delivery of in-store financial service platforms, minimizing transaction latency, accelerating release cycles, and elevating the Point-of-Sale (POS) experience.",
+        },
+      ],
+    },
+    {
+      company: "Conduent Inc.",
+      role: "Business Process Manager",
+      dates: "Mar 2019 - Dec 2019",
+      bullets: [
+        {
+          lead: "AI/ML Strategy:",
+          text:
+            "Spearheaded development of NLP-based machine-learning models for customer sentiment analysis, enabling data-driven strategies to reduce churn.",
         },
         {
-          lead: "Executive Influence:",
+          lead: "Data Visualization:",
           text:
-            "Presented real-time financial data models and system health trade-offs to executive boards, securing buy-in for continuous tech-debt remediation alongside feature delivery.",
+            "Delivered executive dashboards (Power BI) visualizing revenue trends and operational efficiency, directly informing quarterly business reviews (QBRs).",
+        },
+      ],
+    },
+    {
+      company: "Intel Corporation",
+      role: "Senior Business Analyst",
+      dates: "Jul 2016 - Mar 2019",
+      bullets: [
+        {
+          lead: "Platform Integration:",
+          text:
+            "Managed vendor relationships and delivered an integration platform handling 10,000+ daily transactions, generating $10M in business value.",
+        },
+        {
+          lead: "Big Data Analytics:",
+          text:
+            "Led data-analysis initiatives using Impala and Hive, applying predictive modeling to optimize supply-chain decisions.",
+        },
+      ],
+    },
+    {
+      company: "Early Career",
+      role: "Business Analyst - Odessa Technologies; Accenture",
+      dates: "Jul 2012 - Jun 2016",
+      bullets: [
+        {
+          lead: "",
+          text:
+            "Business analysis and delivery across enterprise software programs at Odessa Technologies (2015-2016) and Accenture (2012-2015).",
         },
       ],
     },
   ],
 
+  education: [
+    "MBA in E-Business - Annamalai University (2022)",
+    "PG in Big Data Analytics - Illinois Institute of Technology (2018)",
+    "B.E. in Electronics & Instrumentation - Visvesvaraya Technological University (2012)",
+  ],
+
   credentials: [
-    "MBA in E-Business & PG in Big Data Analytics",
-    "Project Management Professional (PMP\u00AE)",
-    "Lean Six Sigma Black Belt (LSSBB) & Green Belt (KPMG)",
-    "Certified ScrumMaster (CSM\u00AE) & Certified Scrum Product Owner (CSPO\u00AE)",
-    "SAFe\u00AE 5 DevOps Practitioner & ITIL\u00AE Certified",
+    "PMP Certified (PMP#-3195092)",
+    "Lean Six Sigma Black Belt, KPMG (DL122024138)",
+    "Lean Six Sigma Green Belt, KPMG (BG122014272)",
+    "SAFe 5 DevOps Practitioner (86530983-9427)",
+    "Certified ScrumMaster - CSM (000594368)",
+    "Certified Scrum Product Owner - CSPO (000594368)",
+    "ITIL Certified & Practitioner (GR750213195VS)",
   ],
 };
 

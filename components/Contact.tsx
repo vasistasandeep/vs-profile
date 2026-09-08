@@ -2,7 +2,7 @@
 
 // components/Contact.tsx
 //
-// Executive Contact section (Req 11). Two columns:
+// Contact section (Req 11) — friendly "Let's connect" voice. Two columns:
 //   (1) Direct channels — LinkedIn (new tab), mailto to primaryEmail, and the
 //       exact location line (Req 11.1).
 //   (2) Contact_Form — Name / Work Email / Organization / Message with the
@@ -50,9 +50,8 @@ const INITIAL_VALUES: ContactValues = {
   message: "",
 };
 
-/** Exact location line required by Req 11.1. */
-const LOCATION_LINE =
-  "Bengaluru, India (Open to Global Leadership & Advisory Roles)";
+/** Location line (Req 11.1) — brand-neutral warmth, no availability pitch. */
+const LOCATION_LINE = "Bengaluru, India — always happy to talk platforms";
 
 const inputBase =
   "w-full rounded-lg border border-border bg-surface2 px-3 py-2 text-sm text-fg " +
@@ -134,22 +133,23 @@ export function Contact() {
   // mailto fallback surfacing both the primary address and the fallback
   // address (Req 11.5).
   const fallbackMailto = `mailto:${site.primaryEmail}?cc=${site.fallbackEmail}&subject=${encodeURIComponent(
-    "Advisory Inquiry",
+    "Let's connect",
   )}`;
 
   return (
     <SectionWrapper
       id="contact"
-      eyebrow="Contact"
-      title="Executive Contact & Advisory Inquiries"
+      eyebrow="Say hello"
+      title="Let's start a conversation"
     >
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Column 1 — direct channels (Req 11.1) */}
         <GlassCard className="p-6">
-          <h3 className="text-lg font-semibold text-fg">Direct Channels</h3>
+          <h3 className="text-lg font-semibold text-fg">Find me here</h3>
           <p className="mt-2 text-sm text-muted">
-            Reach out directly for platform architecture, advisory, or
-            leadership conversations.
+            Whether it&apos;s scaling platforms, building teams, or trading war
+            stories from a live event, I&apos;m always up for a good
+            conversation.
           </p>
 
           <div className="mt-6 space-y-3">

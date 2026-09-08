@@ -22,6 +22,10 @@ import userEvent from "@testing-library/user-event";
 import Contact from "@/components/Contact";
 import { site } from "@/data/site";
 
+// Guard against intermittent 5s-default timeouts under parallel machine
+// load (long userEvent.type + async fetch flow). Environment timing only.
+vi.setConfig({ testTimeout: 15000 });
+
 /** Fill the three required fields with valid values so validation passes. */
 async function fillValidForm(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText(/name/i), "Priya Executive");

@@ -1,13 +1,15 @@
 ﻿"use client";
 
 import { useState } from "react";
-import { Gamepad2, Siren, ListOrdered } from "lucide-react";
+import { Gamepad2, Siren, ListOrdered, Gauge, CalendarClock } from "lucide-react";
 
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { TriviaBlitz } from "@/components/games/TriviaBlitz";
 import { IncidentCommander } from "@/components/games/IncidentCommander";
 import { PrioritizationPoker } from "@/components/games/PrioritizationPoker";
+import { ErrorBudgetBalancer } from "@/components/games/ErrorBudgetBalancer";
+import { SprintCapacityPlanner } from "@/components/games/SprintCapacityPlanner";
 
 /**
  * Arcade — an engagement section with domain-themed mini-games. A simple game
@@ -19,7 +21,7 @@ import { PrioritizationPoker } from "@/components/games/PrioritizationPoker";
  * by extending the GAMES array.
  */
 
-type GameId = "trivia" | "incident" | "priority";
+type GameId = "trivia" | "incident" | "priority" | "budget" | "sprint";
 
 interface GameDef {
   id: GameId;
@@ -51,6 +53,20 @@ const GAMES: GameDef[] = [
     icon: ListOrdered,
     render: () => <PrioritizationPoker />,
   },
+  {
+    id: "budget",
+    label: "Error Budget Balancer",
+    blurb: "Spend a quarter's error budget: ship fast without breaching the SLO.",
+    icon: Gauge,
+    render: () => <ErrorBudgetBalancer />,
+  },
+  {
+    id: "sprint",
+    label: "Sprint Capacity Planner",
+    blurb: "Fit the highest-value backlog into a fixed sprint capacity.",
+    icon: CalendarClock,
+    render: () => <SprintCapacityPlanner />,
+  },
 ];
 
 export function Arcade() {
@@ -74,7 +90,7 @@ export function Arcade() {
       <div
         role="tablist"
         aria-label="Choose a mini-game"
-        className="grid grid-cols-1 gap-3 sm:grid-cols-3"
+        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
       >
         {GAMES.map((g) => {
           const Icon = g.icon;

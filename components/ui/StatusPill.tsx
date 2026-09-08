@@ -3,14 +3,14 @@ import type { HTMLAttributes } from "react";
 /**
  * StatusPill — the availability indicator (Req 1.3).
  *
- * Renders a small glassmorphism pill with a pulsing emerald dot and the exact
- * text "Available for Executive & Advisory Roles". This is a plain,
+ * Renders a small glassmorphism pill with a pulsing emerald dot and a warm,
+ * brand-voice status line ("Building platforms that scale"). This is a plain,
  * presentational component (no `"use client"`): it renders a styled `<span>`
  * with no hooks, so it works in server or client trees alike.
  */
 
-/** The exact availability text required by Req 1.3. */
-export const STATUS_PILL_TEXT = "Available for Executive & Advisory Roles";
+/** Brand-voice status line (Req 1.3) — confident, not a job-seeking pitch. */
+export const STATUS_PILL_TEXT = "Building platforms that scale";
 
 export type StatusPillProps = HTMLAttributes<HTMLSpanElement>;
 

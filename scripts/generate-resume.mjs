@@ -69,6 +69,10 @@ function buildHtml(r) {
     .map((c) => `<li>${esc(c)}</li>`)
     .join("\n");
 
+  const education = (r.education || [])
+    .map((e) => `<li>${esc(e)}</li>`)
+    .join("\n");
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -119,6 +123,7 @@ function buildHtml(r) {
     <div class="contact">
       ${esc(r.location)}
       <span class="sep">|</span>
+      ${r.phone ? esc(r.phone) + ' <span class="sep">|</span> ' : ""}
       <a href="mailto:${esc(r.email)}">${esc(r.email)}</a>
       <span class="sep">|</span>
       <a href="${esc(r.linkedInUrl)}">${esc(r.linkedIn)}</a>
@@ -129,7 +134,7 @@ function buildHtml(r) {
   <hr class="rule" />
 
   <section class="section">
-    <div class="section-title">Executive Summary</div>
+    <div class="section-title">Profile</div>
     <div class="summary">${esc(r.summary)}</div>
   </section>
 
@@ -144,7 +149,12 @@ function buildHtml(r) {
   </section>
 
   <section class="section">
-    <div class="section-title">Education &amp; Credentials</div>
+    <div class="section-title">Education</div>
+    <ul class="creds">${education}</ul>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Certifications</div>
     <ul class="creds">${credentials}</ul>
   </section>
 </body>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin } from "lucide-react";
+import { Users } from "lucide-react";
 
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
@@ -13,13 +13,14 @@ import {
 import { testimonials } from "@/data/testimonials";
 
 /**
- * Testimonials — the Leadership Endorsements & Peer Validation section (Req 10).
+ * Testimonials — the "What people I've worked with say" section (Req 10).
  *
- * Renders the three testimonial cards from `data/testimonials.ts` as semantic
- * `<article>` elements (Req 10.1, 15.3), each showing a profile badge built from
- * the endorser's initials, the endorsement quote, and the executive title
- * (Req 10.2), plus a LinkedIn placeholder link that opens in a new browser tab
- * via `target="_blank"` + `rel="noopener noreferrer"` (Req 10.3, 10.4).
+ * Renders three reflections from `data/testimonials.ts` as semantic
+ * `<article>` elements (Req 10.1, 15.3), each showing a role badge built from
+ * initials, the quote, and the ROLE-ONLY attribution title (Req 10.2). To keep
+ * the section honest, attribution is anonymized by role — there are no
+ * fabricated names or personal profile links that could impersonate a real,
+ * identifiable person.
  *
  * The grid reveals its cards with a staggered entry animation when it enters the
  * viewport (Req 10.5), running at most once (`viewport={{ once: true }}`,
@@ -38,9 +39,14 @@ export function Testimonials() {
   return (
     <SectionWrapper
       id="endorsements"
-      eyebrow="Endorsements"
-      title="Leadership Endorsements & Peer Validation"
+      eyebrow="In their words"
+      title="What people I've worked with say"
     >
+      <p className="mb-8 max-w-2xl text-sm leading-relaxed text-muted">
+        Reflections gathered from the engineering, product, and delivery leaders
+        I&apos;ve partnered with, shared by role to respect their privacy.
+      </p>
+
       <motion.div
         className="grid grid-cols-1 gap-6 md:grid-cols-3"
         variants={containerVariants}
@@ -70,17 +76,12 @@ export function Testimonials() {
                 “{testimonial.quote}”
               </blockquote>
 
-              {/* LinkedIn placeholder link, opens in a new tab (Req 10.3, 10.4). */}
-              <a
-                href={testimonial.linkedInUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent2 transition-colors hover:opacity-80"
-              >
-                <Linkedin aria-hidden="true" className="h-4 w-4" />
-                <span>Connect on LinkedIn</span>
-                <span className="sr-only"> ({testimonial.title})</span>
-              </a>
+              {/* Role-only attribution (Req 10.1) — anonymized, so no fabricated
+                  names or profile links that could impersonate real people. */}
+              <p className="mt-6 flex items-center gap-2 text-sm font-medium text-accent2">
+                <Users aria-hidden="true" className="h-4 w-4" />
+                <span>A leader I&apos;ve partnered with</span>
+              </p>
             </GlassCard>
           </motion.article>
         ))}

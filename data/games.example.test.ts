@@ -1,8 +1,15 @@
 ﻿// Example tests for the Arcade content data: shape + answer validity.
 
 import { describe, expect, it } from "vitest";
-import { triviaQuestions, incidentSteps, priorityFeatures } from "@/data/games";
-import { isTriviaCorrect, riceScore } from "@/lib/games";
+import {
+  triviaQuestions,
+  incidentSteps,
+  priorityFeatures,
+  errorBudgetConfig,
+  sprintCapacity,
+  sprintBacklog,
+} from "@/data/games";
+import { isTriviaCorrect, riceScore, optimalValue } from "@/lib/games";
 
 describe("Arcade content data", () => {
   it("every trivia question has a valid answerIndex and >= 2 options", () => {
@@ -40,5 +47,34 @@ describe("Arcade content data", () => {
       expect(f.effort).toBeGreaterThan(0);
       expect(riceScore(f)).toBeGreaterThanOrEqual(0);
     }
+  });
+
+  it("error budget config has non-empty periods, a positive budget, and coaching copy", () => {
+    expect(errorBudgetConfig.periods.length).toBeGreaterThan(0);
+    for (const label of errorBudgetConfig.periods) {
+      expect(label.length).toBeGreaterThan(0);
+    }
+    expect(errorBudgetConfig.budget).toBeGreaterThan(0);
+    expect(errorBudgetConfig.intro.length).toBeGreaterThan(0);
+    expect(errorBudgetConfig.withinBudgetCoaching.length).toBeGreaterThan(0);
+    expect(errorBudgetConfig.overBudgetCoaching.length).toBeGreaterThan(0);
+  });
+
+  it("sprint backlog has positive points/values, a positive capacity, and a non-trivial optimum", () => {
+    expect(sprintCapacity).toBeGreaterThan(0);
+    expect(sprintBacklog.length).toBeGreaterThanOrEqual(6);
+    expect(sprintBacklog.length).toBeLessThanOrEqual(8);
+    const ids = new Set(sprintBacklog.map((i) => i.id));
+    expect(ids.size).toBe(sprintBacklog.length); // unique ids
+    for (const item of sprintBacklog) {
+      expect(item.points).toBeGreaterThan(0);
+      expect(item.value).toBeGreaterThan(0);
+      expect(item.name.length).toBeGreaterThan(0);
+    }
+    // The backlog is a real puzzle: not everything fits, so the optimum is
+    // below the sum of all values.
+    const totalValue = sprintBacklog.reduce((s, i) => s + i.value, 0);
+    expect(optimalValue(sprintBacklog, sprintCapacity)).toBeLessThan(totalValue);
+    expect(optimalValue(sprintBacklog, sprintCapacity)).toBeGreaterThan(0);
   });
 });

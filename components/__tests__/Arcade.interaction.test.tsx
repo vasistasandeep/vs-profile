@@ -26,7 +26,7 @@ describe("Arcade", () => {
   it("renders a game picker with exactly one selected tab", () => {
     render(<Arcade />);
     const tabs = screen.getAllByRole("tab");
-    expect(tabs).toHaveLength(3);
+    expect(tabs).toHaveLength(5);
     const selected = tabs.filter((t) => t.getAttribute("aria-selected") === "true");
     expect(selected).toHaveLength(1);
     // Default is Trivia Blitz.
@@ -74,6 +74,43 @@ describe("Arcade", () => {
 
     // A "Match Score" label and an out-of-1000 value appear.
     expect(within(panel).getByText(/Match Score/i)).toBeInTheDocument();
+    expect(within(panel).getByText(/\/ 1000/)).toBeInTheDocument();
+  });
+
+  it("Error Budget Balancer switches in and reveals a quarter score", async () => {
+    const user = userEvent.setup();
+    render(<Arcade />);
+
+    await user.click(
+      screen.getByRole("tab", { name: /Error Budget Balancer/i }),
+    );
+    const panel = screen.getByRole("tabpanel");
+    await user.click(
+      within(panel).getByRole("button", { name: /Lock in quarter/i }),
+    );
+
+    expect(within(panel).getByText(/Quarter Score/i)).toBeInTheDocument();
+    expect(within(panel).getByText(/\/ 1000/)).toBeInTheDocument();
+  });
+
+  it("Sprint Capacity Planner switches in and reveals a sprint score", async () => {
+    const user = userEvent.setup();
+    render(<Arcade />);
+
+    await user.click(
+      screen.getByRole("tab", { name: /Sprint Capacity Planner/i }),
+    );
+    const panel = screen.getByRole("tabpanel");
+    // Select a couple of items, then score.
+    const itemButtons = within(panel).getAllByRole("button", {
+      pressed: false,
+    });
+    await user.click(itemButtons[0]);
+    await user.click(
+      within(panel).getByRole("button", { name: /Score my sprint/i }),
+    );
+
+    expect(within(panel).getByText(/Sprint Score/i)).toBeInTheDocument();
     expect(within(panel).getByText(/\/ 1000/)).toBeInTheDocument();
   });
 });

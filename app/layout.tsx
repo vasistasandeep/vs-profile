@@ -13,6 +13,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { site } from "@/data/site";
+import { education } from "@/data/education";
 
 import "./globals.css";
 
@@ -30,12 +31,54 @@ export const metadata: Metadata = {
   title: site.og.title,
   description: site.og.description,
   metadataBase: new URL(siteUrl),
+  // Keyword-rich but human; reinforces the program/product-leadership brand and
+  // the platform domains for search relevance.
+  keywords: [
+    "Vasista Sandeep",
+    "program management",
+    "product management",
+    "technical program manager",
+    "platform leadership",
+    "product leadership",
+    "OTT",
+    "streaming platforms",
+    "SonyLIV",
+    "high-concurrency systems",
+    "observability",
+    "SRE",
+    "site reliability",
+    "personalization",
+    "GenAI",
+    "FinTech",
+    "retail commerce",
+    "Six Sigma Black Belt",
+    "Bengaluru",
+    "India",
+  ],
+  authors: [{ name: site.name, url: site.jsonLd.url }],
+  creator: site.name,
+  publisher: site.name,
+  alternates: {
+    canonical: site.jsonLd.url,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: site.og.title,
     description: site.og.description,
     siteName: site.og.siteName,
     url: siteUrl,
     type: site.og.type as "website",
+    locale: "en_US",
     images: [
       {
         url: site.og.imagePath,
@@ -68,7 +111,24 @@ const jsonLd = {
       url: site.jsonLd.url,
       // Absolute URL to the professional headshot for rich results (Req 15.2).
       image: new URL(site.portrait.src, siteUrl).toString(),
+      // Brand hook mirrors the OpenGraph description for a consistent story.
+      description: site.og.description,
       jobTitle: site.jsonLd.jobTitle,
+      worksFor: {
+        "@type": "Organization",
+        name: "Sony Pictures Networks India",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bengaluru",
+        addressCountry: "IN",
+      },
+      // Academic history, sourced from data/education.ts as the single source
+      // of truth so the three schools stay in sync with the Education section.
+      alumniOf: education.map((item) => ({
+        "@type": "EducationalOrganization",
+        name: item.institution,
+      })),
       sameAs: site.jsonLd.sameAs,
       knowsAbout: site.jsonLd.knowsAbout,
     },
@@ -88,16 +148,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <head>
-        {/* No-flash theme init: before first paint, apply the persisted theme
-            (default LIGHT when unset) by toggling the `dark` class on
-            <html>. Runs synchronously so there is no light→dark flicker. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
-          }}
-        />
-      </head>
       <body className="min-h-screen bg-background font-sans text-muted antialiased">
         {/* JSON-LD Person + ProfilePage structured data (Req 15.2) */}
         <script

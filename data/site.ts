@@ -27,11 +27,11 @@ export const site: SiteMeta = {
     alt: "Vasista Sandeep, AVP Program Management (Tech & Product)",
   },
   footerText:
-    "© 2026 Vasista Sandeep • vasistasandeep.in • Program & Product leadership for high-scale consumer platforms.",
+    "© 2026 Vasista Sandeep • vasistasandeep.in • Building platforms that stay fast when the whole crowd shows up at once.",
   og: {
-    title: "Vasista Sandeep | Program & Product Leadership",
+    title: "Vasista Sandeep — Platform & Product Leader",
     description:
-      "Executive technology leader and Six Sigma Black Belt with 14+ years scaling consumer platforms across OTT, FinTech, and Retail — from SonyLIV (30M+ users) to Walmart and Intel.",
+      "I'm Vasista Sandeep, a program and product leader with 14+ years and a Six Sigma Black Belt, building consumer platforms that scale calmly to 30M+ users across OTT, FinTech, and Retail. Here's how I think about platforms, teams, and the moments they get tested.",
     imagePath: "/og-image.png",
     siteName: "Vasista Sandeep",
     type: "website",

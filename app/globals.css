@@ -1,67 +1,45 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
- * Semantic theme tokens.
+ * Semantic theme tokens — DARK-ONLY, clean, no shadows.
  *
- * The site ships a CLEAN LIGHT DEFAULT theme (`:root`) with an opt-in DARK
- * theme (`.dark` on <html>). Every token is exposed as an RGB triple so
- * Tailwind's `<utility>-<token>/<opacity>` syntax works (e.g. `bg-surface/85`,
- * `border-accent/40`). Components consume the tokens via the Tailwind color
- * aliases wired in tailwind.config.ts (background, surface, surface2, border,
- * fg, muted, accent, accent2).
+ * The site is a single, polished dark theme (no light mode, no toggle). Every
+ * token is exposed as an RGB triple so Tailwind's `<utility>-<token>/<opacity>`
+ * syntax works (e.g. `bg-surface/80`, `border-accent/40`). Components consume
+ * the tokens via the aliases in tailwind.config.ts (background, surface,
+ * surface2, border, fg, muted, accent, accent2).
  *
- * LIGHT (default): near-white page, white cards, slate borders, slate-900
- * headings, slate-600 body, emerald-600 / cyan-600 accents (AA on light).
- * DARK: obsidian page, elevated slate surfaces, solid dark borders, white
- * headings, slate-300 body, emerald-400 / cyan-400 accents.
+ * Palette: deep ink page, slightly-raised slate surfaces, hairline borders,
+ * crisp white headings, readable slate-300 body, emerald + cyan accents.
+ * Depth comes from borders and subtle surface steps — NOT drop shadows.
  * ------------------------------------------------------------------------- */
 :root {
+  color-scheme: dark;
+
   /* Page + surfaces */
-  --background: 248, 250, 252; /* slate-50 */
-  --surface: 255, 255, 255; /* white */
-  --surface-2: 241, 245, 249; /* slate-100 (subtle raised) */
-  --border: 226, 232, 240; /* slate-200 */
+  --background: 8, 11, 20; /* deep ink */
+  --surface: 17, 24, 39; /* raised slate */
+  --surface-2: 30, 41, 59; /* slate-800 (subtle raised) */
+  --border: 39, 51, 74; /* hairline border, clearly visible on dark */
 
   /* Text */
-  --text: 15, 23, 42; /* slate-900 headings */
-  --text-muted: 71, 85, 105; /* slate-600 body */
+  --text: 248, 250, 252; /* near-white headings */
+  --text-muted: 203, 213, 225; /* slate-300 body (high readability) */
 
-  /* Accents (AA-safe on a light background) */
-  --accent: 5, 150, 105; /* emerald-600 */
-  --accent-2: 8, 145, 178; /* cyan-600 */
-
-  /* Card elevation shadow (soft + visible on light) */
-  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06),
-    0 8px 24px -12px rgba(15, 23, 42, 0.12);
-}
-
-.dark {
-  /* Page + surfaces */
-  --background: 10, 15, 26; /* obsidian / slate-950 */
-  --surface: 15, 23, 42; /* slate-900 elevated */
-  --surface-2: 30, 41, 59; /* slate-800 */
-  --border: 30, 41, 59; /* solid slate-800 border */
-
-  /* Text */
-  --text: 255, 255, 255; /* crisp white headings */
-  --text-muted: 203, 213, 225; /* slate-300 body */
-
-  /* Accents (AA-safe on obsidian) */
+  /* Accents (AA-safe on the dark background) */
   --accent: 52, 211, 153; /* emerald-400 */
   --accent-2: 34, 211, 238; /* cyan-400 */
 
-  /* Card elevation shadow (subtle on dark; depth via border) */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4),
-    0 8px 24px -14px rgba(0, 0, 0, 0.6);
+  /* Shadows intentionally disabled — the design uses borders + surface steps
+   * for depth, not drop shadows (clean, non-"shadowy" look). */
+  --shadow-card: none;
 }
 
 @layer base {
   html {
-    /* Prevent horizontal layout shift when a modal (Radix Dialog) engages its
-     * scroll lock. Reserving the scrollbar gutter keeps the fixed navbar and
-     * page content from jumping (Req 1.12). */
+    /* Prevent horizontal layout shift when a modal engages its scroll lock. */
     scrollbar-gutter: stable;
     scroll-behavior: smooth;
   }
@@ -69,17 +47,65 @@
   body {
     background-color: rgb(var(--background));
     color: rgb(var(--text-muted));
-    /* Geist Sans (fallback Inter) is applied via next/font in app/layout.tsx */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Readable text selection in the dark palette. */
+  ::selection {
+    background-color: rgb(var(--accent) / 0.25);
+    color: rgb(var(--text));
+  }
+}
+
+@layer utilities {
+  /* Aurora / mesh gradient backdrop for the hero. Soft, GPU-cheap radial
+   * blooms in the accent hues over the deep-ink page. No image required. */
+  .hero-aurora {
+    background:
+      radial-gradient(
+        60% 60% at 18% 12%,
+        rgb(var(--accent) / 0.18) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        55% 55% at 88% 20%,
+        rgb(var(--accent-2) / 0.16) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        70% 70% at 50% 100%,
+        rgb(var(--accent) / 0.1) 0%,
+        transparent 65%
+      );
+  }
+
+  /* Animated gradient text for hero emphasis words. */
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-2)),
+      rgb(var(--accent))
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: text-shimmer 6s linear infinite;
+  }
+
+  @keyframes text-shimmer {
+    to {
+      background-position: 200% center;
+    }
   }
 }
 
 /* ---------------------------------------------------------------------------
- * Reduced-motion backstop (Req 17.4).
- * Defense-in-depth layer complementing Framer Motion's useReducedMotion():
- * neutralizes transitions, animations, and the Credentials marquee so no
- * non-essential motion runs when the visitor prefers reduced motion.
+ * Reduced-motion backstop: neutralize non-essential motion (incl. the hero
+ * shimmer and any marquee) when the visitor prefers reduced motion.
  * ------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -95,7 +121,10 @@
     scroll-behavior: auto !important;
   }
 
-  /* Halt any marquee-style continuous motion (e.g., Credentials bar) */
+  .text-gradient {
+    animation: none !important;
+  }
+
   .marquee,
   [data-marquee] {
     animation: none !important;
@@ -104,14 +133,8 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Global keyboard focus indicator (Req 17.3, 17.5).
- *
- * Provides a visible accent focus ring on every interactive element when it
- * receives *keyboard* focus (`:focus-visible` — mouse/touch focus stays quiet).
- * The ring uses the theme --accent token so it resolves to an AA-safe shade in
- * both light and dark themes (emerald-600 on light, emerald-400 on dark). This
- * is a site-wide baseline; component-level `focus-visible:ring-*` styles layer
- * on top and are not suppressed here.
+ * Global keyboard focus indicator. Visible accent ring on keyboard focus only
+ * (`:focus-visible`); mouse/touch focus stays quiet. Uses the --accent token.
  * ------------------------------------------------------------------------- */
 @layer base {
   a:focus-visible,
@@ -126,32 +149,13 @@
     outline-offset: 2px;
     border-radius: 4px;
   }
-
-  /* Never strip focus visibility without a replacement (Req 17.5). Elements
-   * that intentionally manage their own ring can opt out with `outline-none`
-   * via component-level `focus-visible:ring-*`, which remains visible. */
 }
 
 /* ---------------------------------------------------------------------------
- * WCAG AA contrast verification of the design-system token pairs (Req 17.3).
- * Ratios below are computed with the WCAG 2.x formula (L1+0.05)/(L2+0.05).
- *
- * LIGHT theme (background slate-50 #f8fafc, surface white #ffffff):
- *   Pair                                    | Ratio    | AA target        | Result
- *   ----------------------------------------|----------|------------------|-------
- *   slate-900 #0f172a text  on #ffffff      | ~17.9:1  | 4.5:1 (text)     | PASS (AAA)
- *   slate-600 #475569 muted on #ffffff      |  ~7.0:1  | 4.5:1 (text)     | PASS (AAA)
- *   emerald-600 #059669 accent on #ffffff   |  ~4.5:1  | 4.5:1 / 3:1 (UI) | PASS
- *   cyan-600 #0891b2 accent2 on #ffffff     |  ~4.5:1  | 4.5:1 / 3:1 (UI) | PASS
- *
- * DARK theme (background obsidian #0a0f1a, surface slate-900 #0f172a):
- *   white  #ffffff text     on #0a0f1a      | ~19.3:1  | 4.5:1 (text)     | PASS (AAA)
- *   slate-300 #cbd5e1 muted on #0a0f1a      | ~13.6:1  | 4.5:1 (text)     | PASS (AAA)
- *   emerald-400 #34d399 accent on #0a0f1a   | ~10.6:1  | 4.5:1 / 3:1 (UI) | PASS
- *   cyan-400 #22d3ee accent2 on #0a0f1a     | ~11.4:1  | 4.5:1 / 3:1 (UI) | PASS
- *
- * Findings: every heading/body/accent token pair clears WCAG AA in BOTH
- * themes. The light-theme accents deliberately use the -600 shades so small
- * accent text stays at/above the 4.5:1 threshold. Automated axe checks plus
- * manual assistive-tech review remain the final conformance gate.
+ * WCAG AA contrast (single dark theme, background deep-ink #080b14):
+ *   near-white #f8fafc headings         : ~18:1   PASS (AAA)
+ *   slate-300  #cbd5e1 body             : ~13:1   PASS (AAA)
+ *   emerald-400 #34d399 accent          : ~10:1   PASS
+ *   cyan-400   #22d3ee accent2          : ~11:1   PASS
+ * All pairs clear AA. Automated axe + manual AT review remain the final gate.
  * ------------------------------------------------------------------------- */
