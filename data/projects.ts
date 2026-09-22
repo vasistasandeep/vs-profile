@@ -14,7 +14,6 @@ export const projects: Project[] = [
     name: "LivPulse",
     domain: "OTT Observability",
     repoUrl: "https://github.com/vasistasandeep/LivPulse",
-    demoUrl: "https://liv-pulse.vercel.app",
     tags: ["OTT", "Observability", "TypeScript", "Dashboards"],
     abstract:
       "A real-time OTT platform health and analytics dashboard surfacing streaming KPIs and system pulse in one view.",
@@ -89,7 +88,6 @@ export const projects: Project[] = [
     name: "StoryScope",
     domain: "Product / Agile",
     repoUrl: "https://github.com/vasistasandeep/StoryScope",
-    demoUrl: "https://story-scope-vercel.vercel.app",
     tags: ["Product", "Agile", "Estimation", "Python"],
     abstract:
       "A story-scoping helper that guides teams to a faster, more consistent estimate of user-story size.",
@@ -104,7 +102,6 @@ export const projects: Project[] = [
     name: "Agile Companion",
     domain: "Program / Agile",
     repoUrl: "https://github.com/vasistasandeep/agile-companion",
-    demoUrl: "https://agile-companion.vercel.app",
     tags: ["Agile", "Program Management", "Tooling", "TypeScript"],
     abstract:
       "A lightweight companion for agile ceremonies and program cadences, keeping teams aligned with less overhead.",
