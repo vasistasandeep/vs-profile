@@ -58,31 +58,25 @@ export function Testimonials() {
         {testimonials.map((testimonial) => (
           <motion.article key={testimonial.id} variants={itemVariants}>
             <GlassCard className="flex h-full flex-col p-6">
-              {/* Profile badge — initials (Req 10.2). */}
-              <div className="flex items-center gap-4">
-                <span
-                  aria-hidden="true"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-surface2 text-sm font-semibold tracking-wide text-accent"
-                >
-                  {testimonial.initials}
-                </span>
-                {/* Executive title / attribution (Req 10.1, 10.2). */}
-                <h3 className="text-base font-semibold leading-snug text-fg">
-                  {testimonial.title}
-                </h3>
-              </div>
-
-              {/* Endorsement text (Req 10.2). */}
-              <blockquote className="mt-5 flex-1 text-sm leading-relaxed text-muted">
+              {/* Endorsement quote (Req 10.2). */}
+              <blockquote className="flex-1 text-sm leading-relaxed text-muted">
                 “{testimonial.quote}”
               </blockquote>
 
-              {/* Role-only attribution (Req 10.1) — anonymized, so no fabricated
-                  names or profile links that could impersonate real people. */}
-              <p className="mt-6 flex items-center gap-2 text-sm font-medium text-accent2">
-                <Users aria-hidden="true" className="h-4 w-4" />
-                <span>A leader I&apos;ve partnered with</span>
-              </p>
+              {/* Attribution — avatar badge + ROLE-ONLY title (Req 10.1,
+                  10.2). Anonymized: no fabricated names or profile links. */}
+              <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                <span
+                  aria-hidden="true"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-surface2 text-sm font-semibold tracking-wide text-accent"
+                >
+                  {testimonial.initials}
+                </span>
+                <span className="flex items-center gap-1.5 text-sm font-semibold text-fg">
+                  <Users aria-hidden="true" className="h-4 w-4 text-accent2" />
+                  {testimonial.title}
+                </span>
+              </div>
             </GlassCard>
           </motion.article>
         ))}
