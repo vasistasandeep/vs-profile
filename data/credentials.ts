@@ -38,7 +38,7 @@ export const credentialDetails: CredentialDetail[] = [
     id: "safe-devops",
     name: "SAFe 5 DevOps Practitioner",
     credentialId: "86530983-9427",
-    issuer: "Scrum Alliance",
+    issuer: "Scaled Agile",
   },
   {
     id: "csm",
