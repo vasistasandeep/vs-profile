@@ -38,16 +38,19 @@ export const credentialDetails: CredentialDetail[] = [
     id: "safe-devops",
     name: "SAFe 5 DevOps Practitioner",
     credentialId: "86530983-9427",
+    issuer: "Scrum Alliance",
   },
   {
     id: "csm",
     name: "Certified ScrumMaster (CSM)",
     credentialId: "000594368",
+    issuer: "Scrum Alliance",
   },
   {
     id: "cspo",
     name: "Certified Scrum Product Owner (CSPO)",
     credentialId: "000594368",
+    issuer: "Scrum Alliance",
   },
   {
     id: "itil",
